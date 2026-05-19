@@ -82,52 +82,204 @@
         renderGrid();
     }
 
-    function createFilterBar() {
-        const bar = document.createElement('div');
-        bar.className = 'filter-bar';
-        bar.style.cssText = `
-            display: flex; flex-wrap: wrap; gap: 8px;
-            margin-bottom: 24px; padding: 0 4px;
+    function injectFilterStyles() {
+        if (document.getElementById('anatomy-filter-premium-styles')) return;
+        const style = document.createElement('style');
+        style.id = 'anatomy-filter-premium-styles';
+        style.textContent = `
+            #view-explore {
+                flex-direction: column !important;
+                align-items: stretch !important;
+            }
+
+            .explore-filter-panel {
+                width: 100%;
+                background: rgba(18, 18, 29, 0.45);
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 18px;
+                padding: 14px 20px;
+                margin-bottom: 30px;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+
+            body.theme-light .explore-filter-panel {
+                background: rgba(245, 245, 250, 0.8);
+                border-color: rgba(0, 0, 0, 0.06);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            }
+
+            .explore-filter-label {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: var(--text-primary, #ffffff);
+                font-size: 0.85rem;
+                font-weight: 700;
+                font-family: 'Space Grotesk', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                flex-shrink: 0;
+                padding-right: 18px;
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+                white-space: nowrap;
+            }
+
+            body.theme-light .explore-filter-label {
+                color: #1d1d1f;
+                border-right-color: rgba(0, 0, 0, 0.1);
+            }
+
+            .explore-filter-scroll {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                overflow-x: auto;
+                width: 100%;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE 10+ */
+                padding: 2px 0;
+            }
+
+            .explore-filter-scroll::-webkit-scrollbar {
+                display: none; /* Chrome, Safari */
+            }
+
+            .explore-filter-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 16px;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: 99px;
+                color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+                font-size: 0.82rem;
+                font-weight: 600;
+                font-family: 'Space Grotesk', sans-serif;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                white-space: nowrap;
+            }
+
+            body.theme-light .explore-filter-pill {
+                background: rgba(0, 0, 0, 0.02);
+                border-color: rgba(0, 0, 0, 0.06);
+                color: #515154;
+            }
+
+            .explore-filter-pill:hover {
+                color: var(--text-primary, #ffffff);
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.15);
+                transform: translateY(-1px);
+            }
+
+            body.theme-light .explore-filter-pill:hover {
+                color: #1d1d1f;
+                background: rgba(0, 0, 0, 0.05);
+                border-color: rgba(0, 0, 0, 0.12);
+            }
+
+            .explore-filter-pill.active {
+                color: var(--active-color, #ffffff) !important;
+                background: var(--active-bg, rgba(255, 255, 255, 0.08)) !important;
+                border-color: var(--active-border, rgba(255, 255, 255, 0.25)) !important;
+                font-weight: 700;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            body.theme-light .explore-filter-pill.active {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            }
+
+            .explore-filter-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
+
+            /* Responsive Adaptability Overrides for Mobile Device sizes */
+            @media (max-width: 768px) {
+                .explore-filter-panel {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                    padding: 14px 16px;
+                    border-radius: 16px;
+                    margin-bottom: 24px;
+                }
+
+                .explore-filter-label {
+                    border-right: none;
+                    padding-right: 0;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    width: 100%;
+                }
+
+                body.theme-light .explore-filter-label {
+                    border-bottom-color: rgba(0, 0, 0, 0.08);
+                }
+            }
         `;
+        document.head.appendChild(style);
+    }
+
+    function createFilterBar() {
+        injectFilterStyles();
+
+        const panel = document.createElement('div');
+        panel.className = 'explore-filter-panel';
+
+        // Title/Label on the left
+        const label = document.createElement('div');
+        label.className = 'explore-filter-label';
+        label.innerHTML = `
+            <span style="color: var(--accent-blue, #60A5FA); font-size: 1.1rem; line-height: 1;">⚏</span>
+            <span>${t('filter.title', 'Filter by Group')}</span>
+        `;
+        panel.appendChild(label);
+
+        // Scrollable pills list
+        const scrollContainer = document.createElement('div');
+        scrollContainer.className = 'explore-filter-scroll';
 
         const groups = ['all', ...new Set((window.anatomyData || []).map(s => s.groupKey).filter(gk => gk && gk !== 'scientist'))];
 
         groups.forEach(gk => {
-            const btn = document.createElement('button');
-            btn.className = 'filter-btn' + (activeFilter === gk ? ' active' : '');
-            btn.dataset.filter = gk;
+            const pill = document.createElement('button');
+            pill.className = 'explore-filter-pill' + (activeFilter === gk ? ' active' : '');
+            
+            const color = gk === 'all' ? 'var(--text-primary, #ffffff)' : (GROUP_COLORS[gk] || '#888');
+            pill.style.setProperty('--active-color', color);
+            pill.style.setProperty('--active-border', color + '50');
+            pill.style.setProperty('--active-bg', color + '15');
 
-            const color = gk === 'all' ? 'var(--text-primary)' : (GROUP_COLORS[gk] || '#888');
-            const label = gk === 'all' ? t('filter.all', 'Все') : t(GROUP_LABELS_KEY[gk], gk);
-
-            btn.style.cssText = `
-                padding: 6px 14px; border-radius: 999px; border: 1.5px solid ${color}40;
-                background: ${activeFilter === gk ? color + '20' : 'transparent'};
-                color: ${color}; font-size: 0.78rem; font-weight: 600;
-                cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
-                font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.02em;
+            const groupText = gk === 'all' ? t('filter.all', 'Все') : t(GROUP_LABELS_KEY[gk], gk);
+            
+            pill.innerHTML = `
+                <span class="explore-filter-dot" style="background: ${color}"></span>
+                <span>${groupText}</span>
             `;
-            btn.textContent = label;
 
-            if (gk !== 'all') {
-                const dot = document.createElement('span');
-                dot.style.cssText = `
-                    display: inline-block; width: 7px; height: 7px;
-                    border-radius: 50%; background: ${color};
-                    margin-right: 6px; vertical-align: middle;
-                `;
-                btn.prepend(dot);
-            }
-
-            btn.addEventListener('click', () => {
+            pill.addEventListener('click', () => {
                 activeFilter = gk;
                 renderAll();
             });
 
-            bar.appendChild(btn);
+            scrollContainer.appendChild(pill);
         });
 
-        return bar;
+        panel.appendChild(scrollContainer);
+        return panel;
     }
 
     function renderGrid() {

@@ -3186,5 +3186,8 @@
     "search.results": "Search Results",
     "system.helium.fact": "Helium is the only element that cannot be solidified by sufficient cooling at normal atmospheric pressure; it remains liquid down to absolute zero.",
     "system.lithium.fact": "Lithium is so light that it can float on water, and it is the least dense of all solid elements.",
-    "system.beryllium.fact": "Beryllium is highly transparent to X-rays, making it the premier material for manufacturing X-ray tube windows."
+    "system.beryllium.fact": "Beryllium is highly transparent to X-rays, making it the premier material for manufacturing X-ray tube windows.",
+    "filter.title": "Filter by Group",
+    "filter.subtitle": "Select an element group to filter the table",
+    "filter.reset": "Reset to All"
 }
