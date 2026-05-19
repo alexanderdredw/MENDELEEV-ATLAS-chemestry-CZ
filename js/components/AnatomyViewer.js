@@ -94,14 +94,15 @@
 
             /* Horizontal Trigger Bar */
             .explore-filter-trigger {
-                width: 100%;
+                width: calc(100% - var(--spacing-xl) * 2);
+                max-width: calc(1400px - var(--spacing-xl) * 2);
+                margin: var(--spacing-xl) auto 10px auto;
                 background: rgba(18, 18, 29, 0.45);
                 backdrop-filter: blur(24px);
                 -webkit-backdrop-filter: blur(24px);
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 18px;
                 padding: 16px 24px;
-                margin-bottom: 30px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -128,6 +129,20 @@
                 background: rgba(0, 0, 0, 0.02);
                 border-color: rgba(0, 0, 0, 0.12);
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            @media (max-width: 768px) {
+                .explore-filter-trigger {
+                    width: calc(100% - var(--spacing-md) * 2) !important;
+                    margin: var(--spacing-md) auto 0 auto !important;
+                }
+            }
+
+            @media (max-width: 360px) {
+                .explore-filter-trigger {
+                    width: calc(100% - 20px) !important;
+                    margin: 12px auto 0 auto !important;
+                }
             }
 
             .explore-trigger-content {
