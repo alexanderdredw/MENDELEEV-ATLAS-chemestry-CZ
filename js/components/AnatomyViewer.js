@@ -92,194 +92,496 @@
                 align-items: stretch !important;
             }
 
-            .explore-filter-panel {
+            /* Horizontal Trigger Bar */
+            .explore-filter-trigger {
                 width: 100%;
                 background: rgba(18, 18, 29, 0.45);
                 backdrop-filter: blur(24px);
                 -webkit-backdrop-filter: blur(24px);
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 18px;
-                padding: 14px 20px;
+                padding: 16px 24px;
                 margin-bottom: 30px;
                 display: flex;
                 align-items: center;
-                gap: 16px;
+                justify-content: space-between;
                 box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
                 box-sizing: border-box;
-                overflow: hidden;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             }
 
-            body.theme-light .explore-filter-panel {
-                background: rgba(245, 245, 250, 0.8);
+            body.theme-light .explore-filter-trigger {
+                background: rgba(245, 245, 250, 0.85);
                 border-color: rgba(0, 0, 0, 0.06);
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
             }
 
-            .explore-filter-label {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                color: var(--text-primary, #ffffff);
-                font-size: 0.85rem;
-                font-weight: 700;
-                font-family: 'Space Grotesk', sans-serif;
-                text-transform: uppercase;
-                letter-spacing: 0.06em;
-                flex-shrink: 0;
-                padding-right: 18px;
-                border-right: 1px solid rgba(255, 255, 255, 0.1);
-                white-space: nowrap;
+            .explore-filter-trigger:hover {
+                background: rgba(255, 255, 255, 0.06);
+                border-color: rgba(255, 255, 255, 0.15);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
             }
 
-            body.theme-light .explore-filter-label {
-                color: #1d1d1f;
-                border-right-color: rgba(0, 0, 0, 0.1);
-            }
-
-            .explore-filter-scroll {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                overflow-x: auto;
-                width: 100%;
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none; /* IE 10+ */
-                padding: 2px 0;
-            }
-
-            .explore-filter-scroll::-webkit-scrollbar {
-                display: none; /* Chrome, Safari */
-            }
-
-            .explore-filter-pill {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                padding: 8px 16px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                border-radius: 99px;
-                color: var(--text-secondary, rgba(255, 255, 255, 0.6));
-                font-size: 0.82rem;
-                font-weight: 600;
-                font-family: 'Space Grotesk', sans-serif;
-                cursor: pointer;
-                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-                white-space: nowrap;
-            }
-
-            body.theme-light .explore-filter-pill {
+            body.theme-light .explore-filter-trigger:hover {
                 background: rgba(0, 0, 0, 0.02);
-                border-color: rgba(0, 0, 0, 0.06);
+                border-color: rgba(0, 0, 0, 0.12);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            .explore-trigger-content {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 0.95rem;
+                color: var(--text-primary, #ffffff);
+            }
+
+            body.theme-light .explore-trigger-content {
+                color: #1d1d1f;
+            }
+
+            .explore-trigger-icon {
+                color: var(--accent-blue, #60A5FA);
+                font-size: 1.2rem;
+                line-height: 1;
+            }
+
+            .explore-trigger-text {
+                font-weight: 500;
+                letter-spacing: 0.02em;
+                color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+            }
+
+            body.theme-light .explore-trigger-text {
                 color: #515154;
             }
 
-            .explore-filter-pill:hover {
-                color: var(--text-primary, #ffffff);
-                background: rgba(255, 255, 255, 0.08);
-                border-color: rgba(255, 255, 255, 0.15);
-                transform: translateY(-1px);
+            .explore-trigger-active-val {
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
             }
 
-            body.theme-light .explore-filter-pill:hover {
+            .explore-trigger-chevron {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+                transition: transform 0.3s ease;
+            }
+
+            body.theme-light .explore-trigger-chevron {
+                color: #515154;
+            }
+
+            .explore-filter-trigger:hover .explore-trigger-chevron {
+                transform: translateY(2px);
+                color: var(--text-primary, #ffffff);
+            }
+
+            body.theme-light .explore-filter-trigger:hover .explore-trigger-chevron {
                 color: #1d1d1f;
-                background: rgba(0, 0, 0, 0.05);
+            }
+
+            /* Filter Drawer Overlay Backdrop */
+            .explore-drawer-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .explore-drawer-overlay.active {
+                opacity: 1;
+            }
+
+            /* Slide-out Drawer Panel */
+            .explore-drawer-panel {
+                width: 440px;
+                max-width: 100%;
+                height: 100%;
+                background: rgba(10, 10, 16, 0.92);
+                border-left: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+                padding: 40px 30px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                position: relative;
+            }
+
+            body.theme-light .explore-drawer-panel {
+                background: rgba(250, 250, 252, 0.95);
+                border-left-color: rgba(0, 0, 0, 0.08);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+            }
+
+            .explore-drawer-overlay.active .explore-drawer-panel {
+                transform: translateX(0);
+            }
+
+            /* Close Button */
+            .explore-drawer-close {
+                position: absolute;
+                top: 36px;
+                right: 30px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                color: var(--text-primary, #ffffff);
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            body.theme-light .explore-drawer-close {
+                background: rgba(0, 0, 0, 0.04);
+                border-color: rgba(0, 0, 0, 0.06);
+                color: #1d1d1f;
+            }
+
+            .explore-drawer-close:hover {
+                background: rgba(255, 255, 255, 0.15);
+                border-color: rgba(255, 255, 255, 0.2);
+                transform: scale(1.05) rotate(90deg);
+            }
+
+            body.theme-light .explore-drawer-close:hover {
+                background: rgba(0, 0, 0, 0.08);
                 border-color: rgba(0, 0, 0, 0.12);
             }
 
-            .explore-filter-pill.active {
-                color: var(--active-color, #ffffff) !important;
-                background: var(--active-bg, rgba(255, 255, 255, 0.08)) !important;
-                border-color: var(--active-border, rgba(255, 255, 255, 0.25)) !important;
+            /* Title & Subtitle */
+            .explore-drawer-header {
+                margin-bottom: 35px;
+                padding-right: 50px;
+            }
+
+            .explore-drawer-title {
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 1.8rem;
                 font-weight: 700;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                color: var(--text-primary, #ffffff);
+                margin: 0 0 8px 0;
             }
 
-            body.theme-light .explore-filter-pill.active {
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            body.theme-light .explore-drawer-title {
+                color: #1d1d1f;
             }
 
-            .explore-filter-dot {
-                width: 8px;
-                height: 8px;
+            .explore-drawer-subtitle {
+                font-family: 'Inter', sans-serif;
+                font-size: 0.88rem;
+                color: var(--text-secondary, rgba(255, 255, 255, 0.55));
+                margin: 0;
+                line-height: 1.4;
+            }
+
+            body.theme-light .explore-drawer-subtitle {
+                color: #6e6e73;
+            }
+
+            /* Items List container */
+            .explore-drawer-list {
+                flex: 1;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                padding-right: 4px;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(255,255,255,0.1) transparent;
+            }
+
+            .explore-drawer-list::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .explore-drawer-list::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.15);
+                border-radius: 3px;
+            }
+
+            /* List Item Row styling */
+            .explore-drawer-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 20px;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 14px;
+                color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 0.95rem;
+                font-weight: 500;
+            }
+
+            body.theme-light .explore-drawer-item {
+                background: rgba(0, 0, 0, 0.02);
+                border-color: rgba(0, 0, 0, 0.05);
+                color: #515154;
+            }
+
+            .explore-drawer-item:hover {
+                background: rgba(255, 255, 255, 0.06);
+                border-color: rgba(255, 255, 255, 0.15);
+                color: var(--text-primary, #ffffff);
+                transform: translateY(-1px);
+            }
+
+            body.theme-light .explore-drawer-item:hover {
+                background: rgba(0, 0, 0, 0.04);
+                border-color: rgba(0, 0, 0, 0.1);
+                color: #1d1d1f;
+            }
+
+            /* Active List Item Row styling */
+            .explore-drawer-item.active {
+                background: rgba(255, 255, 255, 0.08) !important;
+                border: 1.5px solid var(--item-active-border, #ffffff) !important;
+                color: var(--text-primary, #ffffff) !important;
+                font-weight: 700;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            body.theme-light .explore-drawer-item.active {
+                background: rgba(255, 255, 255, 1) !important;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            }
+
+            /* Dot on left */
+            .explore-drawer-item-left {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+
+            .explore-drawer-dot {
+                width: 10px;
+                height: 10px;
                 border-radius: 50%;
-                flex-shrink: 0;
+                box-shadow: 0 0 10px var(--dot-glow, transparent);
             }
 
-            /* Responsive Adaptability Overrides for Mobile Device sizes */
-            @media (max-width: 768px) {
-                .explore-filter-panel {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 12px;
-                    padding: 14px 16px;
-                    border-radius: 16px;
-                    margin-bottom: 24px;
-                }
+            /* Checkmark check on right */
+            .explore-drawer-check {
+                color: var(--item-active-color, #60A5FA);
+                font-size: 1.1rem;
+                font-weight: 900;
+                opacity: 0;
+                transform: scale(0.6);
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
 
-                .explore-filter-label {
-                    border-right: none;
-                    padding-right: 0;
-                    padding-bottom: 8px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            .explore-drawer-item.active .explore-drawer-check {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            /* Reset Button at bottom */
+            .explore-drawer-footer {
+                margin-top: 25px;
+            }
+
+            .explore-drawer-reset-btn {
+                width: 100%;
+                padding: 16px;
+                border-radius: 14px;
+                background: transparent;
+                border: 1px dashed rgba(255, 255, 255, 0.15);
+                color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+                font-family: 'Space Grotesk', sans-serif;
+                font-size: 0.95rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            body.theme-light .explore-drawer-reset-btn {
+                border-color: rgba(0, 0, 0, 0.15);
+                color: #515154;
+            }
+
+            .explore-drawer-reset-btn:hover {
+                border-color: rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.03);
+                color: var(--text-primary, #ffffff);
+            }
+
+            body.theme-light .explore-drawer-reset-btn:hover {
+                border-color: rgba(0, 0, 0, 0.3);
+                background: rgba(0, 0, 0, 0.02);
+                color: #1d1d1f;
+            }
+
+            @media (max-width: 500px) {
+                .explore-drawer-panel {
                     width: 100%;
+                    border-left: none;
+                    border-top: 1px solid rgba(255, 255, 255, 0.08);
+                    height: 85%;
+                    margin-top: auto;
+                    transform: translateY(100%);
+                    border-top-left-radius: 24px;
+                    border-top-right-radius: 24px;
+                    padding: 30px 20px;
                 }
 
-                body.theme-light .explore-filter-label {
-                    border-bottom-color: rgba(0, 0, 0, 0.08);
+                .explore-drawer-overlay.active .explore-drawer-panel {
+                    transform: translateY(0);
                 }
             }
         `;
         document.head.appendChild(style);
     }
 
-    function createFilterBar() {
-        injectFilterStyles();
+    function openFilterDrawer() {
+        if (document.querySelector('.explore-drawer-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'explore-drawer-overlay';
 
         const panel = document.createElement('div');
-        panel.className = 'explore-filter-panel';
+        panel.className = 'explore-drawer-panel';
 
-        // Title/Label on the left
-        const label = document.createElement('div');
-        label.className = 'explore-filter-label';
-        label.innerHTML = `
-            <span style="color: var(--accent-blue, #60A5FA); font-size: 1.1rem; line-height: 1;">⚏</span>
-            <span>${t('filter.title', 'Filter by Group')}</span>
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'explore-drawer-close';
+        closeBtn.innerHTML = '&times;';
+
+        const header = document.createElement('div');
+        header.className = 'explore-drawer-header';
+        header.innerHTML = `
+            <h2 class="explore-drawer-title">${t('filter.title', 'Фильтр по группам')}</h2>
+            <p class="explore-drawer-subtitle">${t('filter.subtitle', 'Выберите группу элементов для фильтрации')}</p>
         `;
-        panel.appendChild(label);
 
-        // Scrollable pills list
-        const scrollContainer = document.createElement('div');
-        scrollContainer.className = 'explore-filter-scroll';
+        const list = document.createElement('div');
+        list.className = 'explore-drawer-list';
 
         const groups = ['all', ...new Set((window.anatomyData || []).map(s => s.groupKey).filter(gk => gk && gk !== 'scientist'))];
 
         groups.forEach(gk => {
-            const pill = document.createElement('button');
-            pill.className = 'explore-filter-pill' + (activeFilter === gk ? ' active' : '');
+            const item = document.createElement('div');
+            item.className = 'explore-drawer-item' + (activeFilter === gk ? ' active' : '');
             
-            const color = gk === 'all' ? 'var(--text-primary, #ffffff)' : (GROUP_COLORS[gk] || '#888');
-            pill.style.setProperty('--active-color', color);
-            pill.style.setProperty('--active-border', color + '50');
-            pill.style.setProperty('--active-bg', color + '15');
+            const color = gk === 'all' ? '#ffffff' : (GROUP_COLORS[gk] || '#888');
+            item.style.setProperty('--item-active-border', color);
+            item.style.setProperty('--item-active-color', color);
+            item.style.setProperty('--dot-glow', color + '40');
 
-            const groupText = gk === 'all' ? t('filter.all', 'Все') : t(GROUP_LABELS_KEY[gk], gk);
-            
-            pill.innerHTML = `
-                <span class="explore-filter-dot" style="background: ${color}"></span>
-                <span>${groupText}</span>
+            const labelText = gk === 'all' ? t('filter.all', 'Все') : t(GROUP_LABELS_KEY[gk], gk);
+
+            item.innerHTML = `
+                <div class="explore-drawer-item-left">
+                    <span class="explore-drawer-dot" style="background: ${color};"></span>
+                    <span>${labelText}</span>
+                </div>
+                <span class="explore-drawer-check">✓</span>
             `;
 
-            pill.addEventListener('click', () => {
+            item.addEventListener('click', () => {
                 activeFilter = gk;
+                panel.querySelectorAll('.explore-drawer-item').forEach(el => el.classList.remove('active'));
+                item.classList.add('active');
                 renderAll();
+                closeDrawer();
             });
 
-            scrollContainer.appendChild(pill);
+            list.appendChild(item);
         });
 
-        panel.appendChild(scrollContainer);
-        return panel;
+        const footer = document.createElement('div');
+        footer.className = 'explore-drawer-footer';
+        
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'explore-drawer-reset-btn';
+        resetBtn.textContent = t('filter.reset', 'Сбросить на Все');
+        
+        resetBtn.addEventListener('click', () => {
+            activeFilter = 'all';
+            renderAll();
+            closeDrawer();
+        });
+
+        footer.appendChild(resetBtn);
+
+        panel.appendChild(closeBtn);
+        panel.appendChild(header);
+        panel.appendChild(list);
+        panel.appendChild(footer);
+        overlay.appendChild(panel);
+        document.body.appendChild(overlay);
+
+        setTimeout(() => {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }, 10);
+
+        function closeDrawer() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                overlay.remove();
+            }, 400);
+        }
+
+        closeBtn.addEventListener('click', closeDrawer);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeDrawer();
+        });
+    }
+
+    function createFilterBar() {
+        injectFilterStyles();
+
+        const trigger = document.createElement('div');
+        trigger.className = 'explore-filter-trigger';
+        trigger.id = 'explore-filter-trigger';
+
+        const activeGK = activeFilter;
+        const activeColor = activeGK === 'all' ? 'var(--text-primary, #ffffff)' : (GROUP_COLORS[activeGK] || '#888');
+        const activeText = activeGK === 'all' ? t('filter.all', 'Все') : t(GROUP_LABELS_KEY[activeGK], activeGK);
+
+        trigger.innerHTML = `
+            <div class="explore-trigger-content">
+                <span class="explore-trigger-icon">⚏</span>
+                <span class="explore-trigger-text">${t('filter.title', 'Фильтр по группам')}:</span>
+                <span class="explore-trigger-active-val" style="color: ${activeColor};">${activeText}</span>
+            </div>
+            <div class="explore-trigger-chevron">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+        `;
+
+        trigger.addEventListener('click', () => {
+            openFilterDrawer();
+        });
+
+        return trigger;
     }
 
     function renderGrid() {
