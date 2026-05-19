@@ -49,7 +49,8 @@
         if (!translations[lang]) {
             try {
                 // Add timestamp to prevent caching of old JSON files
-                const response = await fetch(`locales/${lang}_v2.json?v=${new Date().getTime()}`);
+                const fileVersion = lang === 'kk' ? 'v3' : 'v2';
+                const response = await fetch(`locales/${lang}_${fileVersion}.json?v=${new Date().getTime()}`);
                 if (!response.ok) throw new Error(`Failed to load ${lang}`);
                 translations[lang] = await response.json();
             } catch (err) {
