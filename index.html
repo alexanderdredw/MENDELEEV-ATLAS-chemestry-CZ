@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="app.title">Mendeleev Atlas</title>
+    <meta name="description" content="A premium, interactive 3D exploration of the human body."
+        data-i18n="meta.description">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Fonts: Inter (UI) and maybe a Display font for headers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/interactive.css">
+    <link rel="stylesheet" href="css/translate.css">
+    <link rel="stylesheet" href="css/scientists.css?v=250">
+    <link rel="stylesheet" href="css/ai-assistant.css?v=250">
+    <link rel="stylesheet" href="css/syntara.css">
+    <link rel="stylesheet" href="css/animations.css?v=220">
+    <link rel="stylesheet" href="css/knowledge-map.css?v=250">
+
+    <!-- CRITICAL FIX: Inline styles to bypass cache -->
+    <style>
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-size: 1.1rem !important;
+            /* Smaller to fit "Сердечно-сосудистая Система" */
+            letter-spacing: -0.05em !important;
+            /* Tight spacing for long words */
+            margin-bottom: 8px !important;
+            line-height: normal !important;
+            /* Normal height for single line */
+            min-height: 2em !important;
+            /* Fixed height for alignment */
+            display: flex !important;
+            align-items: center !important;
+            white-space: nowrap !important;
+            /* FORCE SINGLE LINE */
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        /* Ensure description also stays constrained */
+        .card-desc {
+            display: -webkit-box !important;
+            line-clamp: 2 !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            min-height: 3em !important;
+        }
+
+        /* Large & Elongated Scientist Cards Override */
+        #scientists-grid {
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)) !important;
+            max-width: 1600px !important;
+            gap: 30px !important;
+        }
+
+        .scientist-card .card-visual {
+            height: 240px !important;
+            transition: all 0.5s ease !important;
+        }
+
+        .scientist-card .card-title {
+            font-size: 1.4rem !important;
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+            white-space: normal !important;
+            min-height: auto !important;
+        }
+
+        .scientist-card .card-desc {
+            font-size: 0.95rem !important;
+            line-height: 1.6 !important;
+            min-height: 3.5em !important;
+        }
+
+        @media (max-width: 768px) {
+            #scientists-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+                gap: 20px !important;
+            }
+            
+            .scientist-card .card-visual {
+                height: 220px !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="theme-dark">
+
+    <div id="app">
+        <!-- Navigation -->
+        <header class="main-header">
+            <!-- Mobile "List" Button (Left) -->
+            <button class="burger-menu" aria-label="Toggle Menu" aria-expanded="false">
+                <div class="burger-icon">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </div>
+                <span class="burger-label" data-i18n="nav.list">List</span>
+            </button>
+
+            <div class="logo" id="app-logo" style="cursor: pointer;">
+                <span class="logo-icon">⚛</span> MENDELEEV<span class="text-highlight">ATLAS</span>
+            </div>
+
+            <nav class="main-nav">
+                <button class="nav-btn active" data-view="home" data-i18n="nav.home">Home</button>
+                <button class="nav-btn" data-view="explore" data-i18n="nav.explore">Explore</button>
+                <button class="nav-btn" data-view="scientists" data-i18n="nav.scientists">Scientists</button>
+                <button class="nav-btn" data-view="learn" data-i18n="nav.learn">Learn</button>
+                <button class="nav-btn" data-view="analytics" data-i18n="nav.analytics">Stats</button>
+                <button class="nav-btn" data-view="search" data-i18n="nav.search">Search</button>
+                <button class="nav-btn" data-view="glossary" data-i18n="nav.glossary">Glossary</button>
+                <button class="nav-btn" data-view="syntara" data-i18n="nav.syntara">Syntara AI</button>
+                <button class="nav-btn" data-view="about" data-i18n="nav.about">About</button>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Toggle Theme">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Hero Section (Default View) -->
+            <section class="hero-section active" id="view-home">
+                <div class="hero-content">
+                    <h1 class="hero-title fade-in-up" data-i18n="hero.title">118 элементов.<br><span class="text-gradient">Одна вселенная</span>.</h1>
+                    <p class="hero-subtitle fade-in-up delay-1" data-i18n="hero.subtitle">Explore the complexity of life
+                        with interactive depth
+                        and precision.</p>
+                    <div class="hero-actions fade-in-up delay-2">
+                        <button class="btn btn-primary glow-effect" data-i18n="hero.start">Start Exploring</button>
+                        <button class="btn btn-secondary" data-i18n="hero.quiz">Take a Quiz</button>
+                    </div>
+                </div>
+                <!-- Particles will be injected here -->
+                <div class="hero-visual">
+                    <div class="visual-container">
+                        <div class="anatomy-silhouette glow-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Fun Fact Floating Card -->
+                <div id="fun-fact-container" class="fun-fact-card fade-in-up delay-3">
+                    <div class="fact-icon">💡</div>
+                    <div class="fact-content">
+                        <span class="fact-label" data-i18n="fact.label">Did you know?</span>
+                        <p id="daily-fact">Loading anatomy fact...</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Scientists & Timeline Section -->
+            <section class="scientists-section" id="view-scientists" style="display:none; flex-direction:column;">
+                <div class="section-header" style="text-align:center; padding: 40px 20px;">
+                    <h1 class="section-title" data-i18n="timeline.title" style="font-size: 2.5rem; margin-bottom: 10px;">Scientific Discoveries</h1>
+                    <p class="section-subtitle" data-i18n="timeline.subtitle" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Exploring the minds that unlocked the secrets of the universe.</p>
+                </div>
+
+                <!-- Timeline Visualizer -->
+                <div id="timeline-container" class="timeline-viz" style="padding: 20px; min-height: 200px;">
+                    <!-- Injected by ScientistsTimeline.js -->
+                </div>
+
+                <!-- Scientists Grid -->
+                <div id="scientists-grid-container" style="padding: 20px;">
+                    <div id="scientists-grid" class="anatomy-grid">
+                        <!-- Injected by ScientistsTimeline.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Explore Section -->
+            <section class="explore-section" id="view-explore" style="display: none;">
+                <!-- System Grid -->
+            </section>
+
+            <!-- Learn/Quiz Section handled by JS -->
+            <section id="view-learn" class="quiz-section" style="display: none;"></section>
+
+            <!-- Analytics Section -->
+            <section id="view-analytics" class="analytics-section" style="display: none;"></section>
+
+            <!-- Search Section handled by JS -->
+            <section id="view-search" class="search-section" style="display: none;"></section>
+
+            <!-- Glossary Section -->
+            <section id="view-glossary" class="glossary-section" style="display: none;">
+                <div class="glossary-container fade-in-up">
+                    <h2 class="section-title" data-i18n="glossary.title">Anatomy Glossary</h2>
+                    <div class="glossary-content">
+                        <p class="glossary-placeholder" data-i18n="glossary.placeholder">Select a term to view its
+                            definition. Content coming soon...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Syntara AI Section -->
+            <section id="view-syntara" class="syntara-section" style="display: none;">
+                <div class="syntara-container fade-in-up">
+                    <!-- 1. Hero -->
+                    <div class="syntara-hero">
+                        <h1 class="syntara-title" data-i18n="syntara.title">Syntara AI</h1>
+                        <p class="syntara-subtitle" data-i18n="syntara.subtitle">Your Personal Intelligent Biology
+                            Assistant</p>
+                        <p class="syntara-description" data-i18n="syntara.desc">
+                            Syntara analyzes your progress, explains complex concepts clearly, and helps you prepare
+                            effectively for exams through adaptive learning.
+                        </p>
+                        <div class="syntara-actions">
+                            <button class="btn btn-primary glow-effect" data-i18n="syntara.btn.start">Start Learning
+                                with AI</button>
+                            <button class="btn btn-secondary" data-i18n="syntara.btn.works">See How It Works</button>
+                        </div>
+                    </div>
+
+                    <!-- 2. AI Slot Container -->
+                    <div class="ai-slot-container">
+                        <div class="ai-header">
+                            <div class="ai-status-group">
+                                <div class="ai-avatar">
+                                    <div class="neural-node"></div>
+                                </div>
+                                <div class="ai-info">
+                                    <span class="ai-name">Syntara</span>
+                                    <span class="ai-status">
+                                        <span class="status-dot"></span> <span
+                                            data-i18n="syntara.status.online">Online</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ai-mode-badge" data-i18n="syntara.badge.mode">Academic Guidance Mode</div>
+                            <div class="voice-toggle">
+                                <!-- Voice Icon Placeholder -->
+                            </div>
+                        </div>
+                        <div class="ai-body">
+                            <div class="ai-placeholder-message"
+                                style="text-align: left; opacity: 0.9; line-height: 1.6;">
+                                <h3 style="margin-bottom: 15px; color: var(--text-primary); font-size: 1.2rem;"
+                                    data-i18n="syntara.placeholder.ask">Ask
+                                    about any anatomical system.</h3>
+                                <p style="margin-bottom: 8px; color: var(--text-secondary);"
+                                    data-i18n="syntara.placeholder.i_will">I will:</p>
+                                <ul style="list-style: none; padding-left: 0; color: var(--text-secondary);">
+                                    <li style="margin-bottom: 5px;" data-i18n="syntara.placeholder.bullet.1">• Explain
+                                        structures and functions</li>
+                                    <li style="margin-bottom: 5px;" data-i18n="syntara.placeholder.bullet.2">• Build
+                                        cross-system connections</li>
+                                    <li style="margin-bottom: 5px;" data-i18n="syntara.placeholder.bullet.3">• Identify
+                                        weak knowledge areas</li>
+                                    <li style="margin-bottom: 5px;" data-i18n="syntara.placeholder.bullet.4">• Generate
+                                        adaptive practice questions</li>
+                                    <li style="margin-bottom: 5px;" data-i18n="syntara.placeholder.bullet.5">• Create
+                                        structured summaries</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ai-input-area">
+                            <div class="ai-input-bar" data-i18n="syntara.input.example">Eg: Explain how the nervous
+                                system interacts with the muscular
+                                system</div>
+
+                            <button class="ai-action-btn send-btn"
+                                style="background: var(--text-primary); color: var(--bg-primary);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Smart Learning Modes -->
+                    <div class="modes-grid">
+                        <div class="mode-card">
+                            <div class="mode-icon">✨</div>
+                            <div class="mode-title" data-i18n="syntara.mode.simple">Explain Simpler</div>
+                            <div class="mode-desc" data-i18n="syntara.mode.simple.desc">Breaks down complex topics into
+                                easy concepts.</div>
+                        </div>
+                        <div class="mode-card">
+                            <div class="mode-icon">🧬</div>
+                            <div class="mode-title" data-i18n="syntara.mode.deep">Deep Explanation</div>
+                            <div class="mode-desc" data-i18n="syntara.mode.deep.desc">Detailed academic analysis of
+                                anatomical structures.</div>
+                        </div>
+                        <div class="mode-card">
+                            <div class="mode-icon">📝</div>
+                            <div class="mode-title" data-i18n="syntara.mode.test">Test Preparation</div>
+                            <div class="mode-desc" data-i18n="syntara.mode.test.desc">Focused practice questions for
+                                your exams.</div>
+                        </div>
+                        <div class="mode-card">
+                            <div class="mode-icon">🔥</div>
+                            <div class="mode-title" data-i18n="syntara.mode.challenge">Challenge Me</div>
+                            <div class="mode-desc" data-i18n="syntara.mode.challenge.desc">Hard questions to push your
+                                knowledge limits.</div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Adaptive Preview -->
+                    <div class="stats-preview-panel">
+                        <div class="stat-item">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label" data-i18n="syntara.stat.weak">Weak Areas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" data-i18n="syntara.value.nervous">Nervous</div>
+                            <div class="stat-label" data-i18n="syntara.stat.rec">Recommended</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label" data-i18n="syntara.stat.acc">Accuracy</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">12m</div>
+                            <div class="stat-label" data-i18n="syntara.stat.time">Study Time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Map Container (Inside Syntara) -->
+                <div class="knowledge-map-container fade-in-up" style="margin-top: 40px;">
+                    <div class="map-header">
+                        <h2 class="section-title" data-i18n="map.title">Knowledge Map</h2>
+                        <p class="section-subtitle" data-i18n="map.subtitle">Your learning structure visualized in real
+                            time.</p>
+                    </div>
+
+                    <div class="map-interface">
+                        <div id="knowledge-map-root" class="map-canvas">
+                            <!-- JS will inject nodes and connections here -->
+                        </div>
+
+                        <div class="map-side-panel" id="map-details-panel">
+                            <div class="panel-placeholder">
+                                <span class="placeholder-icon">👆</span>
+                                <p data-i18n="map.select_node">Select a system to view details</p>
+                            </div>
+                            <div class="panel-content" style="display: none;">
+                                <h3 id="panel-title">System Name</h3>
+                                <div class="panel-stat-row">
+                                    <span class="panel-stat-label" data-i18n="map.progress">Progress</span>
+                                    <span class="panel-stat-value" id="panel-progress">0%</span>
+                                </div>
+                                <div class="panel-status-badge" id="panel-status">Status</div>
+
+                                <div class="panel-section">
+                                    <h4 data-i18n="map.achievements">Achievements</h4>
+                                    <ul id="panel-achievements" class="panel-list">
+                                        <!-- Items injected here -->
+                                    </ul>
+                                </div>
+
+                                <div class="panel-section">
+                                    <h4 data-i18n="map.recommended">Recommended Action</h4>
+                                    <div id="panel-recommendation" class="recommendation-card">
+                                        <!-- Recommendation injected here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot weak"></span>
+                            <span data-i18n="map.weak">Weak</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot developing"></span>
+                            <span data-i18n="map.developing">Developing</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot good"></span>
+                            <span data-i18n="map.good">Good</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot mastered"></span>
+                            <span data-i18n="map.mastered">Mastered</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="view-about" class="about-section" style="display: none;">
+                <div class="about-container fade-in-up">
+                    <h2 class="section-title" data-i18n="credits.title">Behind the Project</h2>
+                    <div class="credits-grid">
+                        <div class="credit-card developer">
+                            <div class="credit-icon">
+                                <div class="dev-icon-lux">
+                                    <div class="icon-orbit"></div>
+                                    <div class="icon-core"></div>
+                                </div>
+                            </div>
+                            <h3 data-i18n="credits.dev.role">Lead Developer</h3>
+                            <p class="credit-name" data-i18n="about.profiles.dev.name">Alexander Zabolotnyy</p>
+                            <p class="credit-desc" data-i18n="credits.dev.desc">Designed and coded the interactive Human
+                                Anatomy Atlas experience.
+                            </p>
+
+                            <div class="credit-contact-section">
+                                <div class="contact-divider"></div>
+                                <h4 class="contact-title" data-i18n="credits.contact.title">Enjoyed this project?</h4>
+                                <p class="contact-text" data-i18n="credits.contact.text">If you like this site and would
+                                    like to collaborate, feel free to reach out. I’m always open to new ideas,
+                                    partnerships, and innovative projects.</p>
+                                <div class="contact-email">
+                                    <span data-i18n="credits.contact.label">Contact me:</span>
+                                    <a href="mailto:zabolotnyyalexandr@gmail.com?subject=Inquiry%20from%20Anatomy%20Atlas&body=Hello,%20I%20would%20like%20to%20ask%20about..."
+                                        class="email-link">zabolotnyyalexandr@gmail.com</a>
+
+                                    <div class="gmail-link-container">
+                                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zabolotnyyalexandr@gmail.com&su=Inquiry%20from%20Anatomy%20Atlas&body=Hello,%20I%20would%20like%20to%20ask%20about..."
+                                            target="_blank" rel="noopener noreferrer" class="gmail-link"
+                                            data-i18n="credits.gmail.open">
+                                            Open in Gmail
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="contact-cta" data-i18n="credits.contact.cta">Let’s build something great
+                                    together.</p>
+                            </div>
+                        </div>
+                        <div class="credit-card flagman">
+                            <div class="credit-icon">
+                                <img src="assets/images/flagman_logo.svg" alt="Flagman School Logo">
+                            </div>
+                            <h3 data-i18n="credits.power.role">Powered By</h3>
+                            <p class="credit-name">Flagman School</p>
+                            <p class="credit-desc" data-i18n="credits.power.desc">Education and mentorship enabling the
+                                creation of advanced web projects.</p>
+
+                            <a href="https://flagman-online.kz/" target="_blank" rel="noopener noreferrer"
+                                class="flagman-link" data-i18n="credits.flagman.link">Distance learning school №1 in
+                                Kazakhstan</a>
+
+                            <div class="credit-extra-section">
+                                <div class="contact-divider"></div>
+                                <h3 data-i18n="credits.curator.role">Curator & Inspirer</h3>
+                                <p class="credit-name" data-i18n="credits.curator.name">Kereybaeva Aigerim Nurzhanovna
+                                </p>
+                                <p class="credit-desc" data-i18n="credits.curator.desc">Biology teacher and project
+                                    mentor enabling the educational vision of the atlas.</p>
+                            </div>
+                        </div>
+
+                        <!-- Extended Profiles Section -->
+                        <div class="dual-profile-section">
+                            <!-- Developer Profile -->
+                            <div class="profile-card" id="profile-dev">
+                                <div class="profile-main">
+                                    <div class="profile-image-container">
+                                        <img src="assets/images/profiles/alexandr_zabolotnyy.png"
+                                            alt="Alexandr Zabolotnyy" class="profile-img">
+                                    </div>
+                                    <div class="profile-header">
+                                        <h3 class="profile-name" data-i18n="about.profiles.dev.name">Alexander
+                                            Zabolotnyy
+                                        </h3>
+                                        <p class="profile-role" data-i18n="about.profiles.dev.role">Lead Developer &
+                                            Architect</p>
+                                    </div>
+                                    <div class="profile-preview">
+                                        <p data-i18n="about.profiles.dev.bio">A full-stack developer and architectural
+                                            designer specialized in high-performance web systems.</p>
+                                    </div>
+                                </div>
+                                <div class="profile-expanded">
+                                    <div class="profile-details">
+                                        <div class="detail-group">
+                                            <h4 data-i18n="about.profiles.label.background">Background</h4>
+                                            <p data-i18n="about.profiles.dev.background">Extensive experience in React,
+                                                Three.js, and high-load backend systems.</p>
+                                        </div>
+                                        <div class="detail-group">
+                                            <h4 data-i18n="about.profiles.label.milestones">Key Milestones</h4>
+                                            <p data-i18n="about.profiles.dev.milestones">• 3D Engine Development\n• AI
+                                                Integration</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="profile-toggle-btn" data-profile="dev">
+                                    <span class="btn-text" data-i18n="about.profiles.btn.show_more">Show More</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+
+                            <!-- Curator Profile -->
+                            <div class="profile-card" id="profile-curator">
+                                <div class="profile-main">
+                                    <div class="profile-image-container">
+                                        <img src="assets/images/profiles/aigerim_kereybaeva.png"
+                                            alt="Kereybaeva Aigerim" class="profile-img">
+                                    </div>
+                                    <div class="profile-header">
+                                        <h3 class="profile-name" data-i18n="about.profiles.curator.name">Kereybaeva
+                                            Aigerim</h3>
+                                        <p class="profile-role" data-i18n="about.profiles.curator.role">Scientific
+                                            Curator / Teacher</p>
+                                    </div>
+                                    <div class="profile-preview">
+                                        <p data-i18n="about.profiles.curator.bio">A dedicated biology educator with a
+                                            focus on innovative teaching methodologies.</p>
+                                    </div>
+                                </div>
+                                <div class="profile-expanded">
+                                    <div class="profile-details">
+                                        <div class="detail-group">
+                                            <h4 data-i18n="about.profiles.label.background">Background</h4>
+                                            <p data-i18n="about.profiles.curator.background">Specialize in Human
+                                                Physiology and General Biology at Flagman School.</p>
+                                        </div>
+                                        <div class="detail-group">
+                                            <h4 data-i18n="about.profiles.label.milestones">Key Milestones</h4>
+                                            <p data-i18n="about.profiles.curator.milestones">• Curriculum Alignment\n•
+                                                Content Verification</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="profile-toggle-btn" data-profile="curator">
+                                    <span class="btn-text" data-i18n="about.profiles.btn.show_more">Show More</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="about-platform-card">
+                            <div class="platform-column platform-main-info">
+                                <h2 class="platform-title" data-i18n="about.platform.title">Anatomy Atlas — An
+                                    Intelligent Educational Platform</h2>
+                                <p class="platform-text" data-i18n="about.platform.intro">Anatomy Atlas is a modern
+                                    educational platform designed for students in grades 8–11...</p>
+
+                                <div class="platform-design-module">
+                                    <div class="module-tag">UX/UI Architecture</div>
+                                    <p class="platform-text" data-i18n="about.platform.ui_ux">The UI/UX architecture has
+                                        been carefully designed with the cognitive needs of students in grades 8–11 in
+                                        mind.</p>
+                                </div>
+                            </div>
+
+                            <div class="platform-column platform-engine-info">
+                                <div class="platform-engine-card">
+                                    <div class="engine-glow"></div>
+                                    <h3 class="engine-title" data-i18n="about.platform.ai.title">Smart Learning Engine
+                                    </h3>
+                                    <p class="platform-text-small" data-i18n="about.platform.ai.intro">Built around
+                                        personalized learning and intelligent analytics:</p>
+
+                                    <div class="feature-grid">
+                                        <div class="feature-item">
+                                            <span class="feature-dot"></span>
+                                            <p data-i18n="about.platform.ai.list.1">Behavioral Analysis</p>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-dot"></span>
+                                            <p data-i18n="about.platform.ai.list.2">Gap Identification</p>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-dot"></span>
+                                            <p data-i18n="about.platform.ai.list.3">Dynamic Difficulty</p>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-dot"></span>
+                                            <p data-i18n="about.platform.ai.list.4">Personalized Roadmaps</p>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-dot"></span>
+                                            <p data-i18n="about.platform.ai.list.5">Confidence Scoring</p>
+                                        </div>
+                                    </div>
+
+                                    <p class="platform-text-small italic" data-i18n="about.platform.ai.profile">
+                                        Individualized learning profiles built via structured educational scenarios.</p>
+                                </div>
+                            </div>
+
+                            <!-- Full Width Conclusion -->
+                            <p class="platform-conclusion" data-i18n="about.platform.conclusion">Integration of
+                                curriculum anatomy with modern ML algorithms and thoughtful design.</p>
+                        </div>
+                    </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <p data-i18n="footer.copyright">2026 Mendeleev Atlas. Educational Use Only.</p>
+        </footer>
+    </div>
+
+    <!-- Three.js & Extensions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- Scripts (Order Sensitive) -->
+    <script src="js/data/anatomy-data.js?v=250"></script>
+    <script src="js/data/anatomy-icons.js?v=250"></script>
+    <script src="js/data/glossary-data.js?v=250"></script>
+    <!-- Effects: Particles restored, Tilt removed -->
+    <!-- <script src="js/effects/TiltEffect.js"></script> -->
+    <script src="js/effects/Particles.js?v=250"></script>
+    <!-- <script src="js/components/ParallaxViewer.js"></script> -->
+
+    <script src="js/components/AnatomyViewer.js?v=250"></script>
+    <script src="js/components/ScientistsTimeline.js?v=250"></script>
+    <script src="js/components/Search.js?v=250"></script>
+    <script src="js/services/DataCollector.js?v=250"></script>
+    <script src="js/components/LearningAssistant.js?v=250"></script>
+    <script src="js/components/Quiz.js?v=250"></script>
+    <script src="js/components/AnalyticsDashboard.js?v=250"></script>
+    <script src="js/secrets.js"></script> <!-- Syntara Config -->
+    <script src="js/components/SyntaraAI.js?v=250"></script>
+    <script src="js/components/KnowledgeMap.js?v=250"></script>
+    <script src="js/translation.js?v=250"></script>
+    <script src="js/app.js?v=250"></script>
+</body>
+
+</html>

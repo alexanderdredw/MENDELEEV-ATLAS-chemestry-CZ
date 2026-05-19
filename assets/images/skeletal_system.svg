@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="bone-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#e3e3e3" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Ribcage hint -->
+  <path d="M120,80 Q200,60 280,80" stroke="#e3e3e3" stroke-width="4" fill="none" opacity="0.6"/>
+  <path d="M130,110 Q200,90 270,110" stroke="#e3e3e3" stroke-width="4" fill="none" opacity="0.6"/>
+  <path d="M140,140 Q200,120 260,140" stroke="#e3e3e3" stroke-width="4" fill="none" opacity="0.6"/>
+  <!-- Spine -->
+  <path d="M200,60 L200,220" stroke="#e3e3e3" stroke-width="8" stroke-dasharray="10,5" fill="none" opacity="0.8"/>
+  <!-- Pelvis hint -->
+  <path d="M160,220 Q200,250 240,220" stroke="#e3e3e3" stroke-width="6" fill="none" opacity="0.7"/>
+  <!-- Glow -->
+  <circle cx="200" cy="150" r="120" fill="url(#bone-glow)" opacity="0.2"/>
+</svg>

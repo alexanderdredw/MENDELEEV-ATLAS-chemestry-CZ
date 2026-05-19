@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="immune-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#4caf50" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Shield Icon (Symbolic) -->
+  <path d="M200,80 C150,70 140,140 140,160 C140,220 200,260 200,260 C200,260 260,220 260,160 C260,140 250,70 200,80 Z" stroke="#4caf50" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <!-- Lymph Nodes Network -->
+  <circle cx="200" cy="110" r="4" fill="#4caf50" opacity="0.8"/>
+  <circle cx="170" cy="130" r="3" fill="#4caf50" opacity="0.7"/>
+  <circle cx="230" cy="130" r="3" fill="#4caf50" opacity="0.7"/>
+  <circle cx="180" cy="180" r="3" fill="#4caf50" opacity="0.7"/>
+  <circle cx="220" cy="180" r="3" fill="#4caf50" opacity="0.7"/>
+  
+  <!-- Connections -->
+  <line x1="200" y1="110" x2="170" y2="130" stroke="#4caf50" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="110" x2="230" y2="130" stroke="#4caf50" stroke-width="1" opacity="0.4"/>
+  <line x1="170" y1="130" x2="180" y2="180" stroke="#4caf50" stroke-width="1" opacity="0.4"/>
+  <line x1="230" y1="130" x2="220" y2="180" stroke="#4caf50" stroke-width="1" opacity="0.4"/>
+
+  <!-- Microbes (being blocked) -->
+  <circle cx="130" cy="150" r="2" fill="#fff" opacity="0.3"/>
+  <circle cx="120" cy="180" r="2" fill="#fff" opacity="0.3"/>
+  <circle cx="270" cy="140" r="2" fill="#fff" opacity="0.3"/>
+
+  <!-- Glow -->
+  <circle cx="200" cy="170" r="90" fill="url(#immune-glow)" opacity="0.25"/>
+</svg>

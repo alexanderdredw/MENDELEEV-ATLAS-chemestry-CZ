@@ -1,0 +1,130 @@
+/* css/translate.css */
+#google_translate_element {
+    display: none !important;
+}
+
+.custom-translate-btn {
+    position: fixed;
+    bottom: 7rem;
+    /* Moved up to avoid Fun Fact Card */
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: var(--bg-glass, rgba(20, 20, 20, 0.6));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary, #ffffff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 9999;
+    font-size: 0.75rem;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.custom-translate-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent-blue, #007aff);
+}
+
+.custom-translate-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.custom-translate-btn svg {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+/* Tooltip */
+.custom-translate-btn::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 120%;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background: var(--bg-secondary, #0a0a0a);
+    color: var(--text-primary, #fff);
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.custom-translate-btn:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 768px) {
+    .custom-translate-btn {
+        position: fixed !important;
+        bottom: 1.5rem !important;
+        right: 1.5rem !important;
+        width: 3rem !important;
+        max-width: 3rem !important;
+        min-width: 3rem !important;
+        height: 3rem !important;
+        max-height: 3rem !important;
+        min-height: 3rem !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 50% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 9999 !important;
+        /* Ensure it doesn't shift */
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+    }
+
+    .custom-translate-btn svg {
+        width: 14px !important;
+        height: 14px !important;
+        margin-bottom: 2px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .custom-translate-btn span {
+        font-size: 0.65rem !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: clip !important;
+        max-width: 100% !important;
+        text-align: center !important;
+        display: block !important;
+    }
+
+    .custom-translate-btn::before {
+        display: none !important;
+        /* Hide tooltip on mobile */
+    }
+
+    /* Move up slightly to avoid overlapping mobile navigation if present */
+    body.has-mobile-nav .custom-translate-btn {
+        bottom: 5rem !important;
+    }
+}

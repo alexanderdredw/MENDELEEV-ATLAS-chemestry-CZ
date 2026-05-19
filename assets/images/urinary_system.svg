@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="uri-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ffb74d" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Kidneys -->
+  <path d="M170,120 C150,110 150,160 170,150 C175,145 175,125 170,120" fill="none" stroke="#ffb74d" stroke-width="3" opacity="0.8"/>
+  <path d="M230,120 C250,110 250,160 230,150 C225,145 225,125 230,120" fill="none" stroke="#ffb74d" stroke-width="3" opacity="0.8"/>
+  
+  <!-- Ureters -->
+  <path d="M170,140 Q180,180 190,210" stroke="#ffb74d" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M230,140 Q220,180 210,210" stroke="#ffb74d" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <!-- Bladder -->
+  <path d="M185,210 Q200,240 215,210" stroke="#ffb74d" stroke-width="2" fill="none" opacity="0.8"/>
+
+  <!-- Glow -->
+  <circle cx="200" cy="160" r="80" fill="url(#uri-glow)" opacity="0.25"/>
+</svg>

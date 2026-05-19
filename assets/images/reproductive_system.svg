@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="repro-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ff4757" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Abstract DNA Helix / Life Symbol -->
+  <path d="M180,100 Q220,150 180,200" stroke="#ff4757" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M220,100 Q180,150 220,200" stroke="#ff4757" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <!-- Connecting Rungs -->
+  <line x1="190" y1="120" x2="210" y2="120" stroke="#ff4757" stroke-width="1" opacity="0.5"/>
+  <line x1="195" y1="150" x2="205" y2="150" stroke="#ff4757" stroke-width="1" opacity="0.5"/>
+  <line x1="190" y1="180" x2="210" y2="180" stroke="#ff4757" stroke-width="1" opacity="0.5"/>
+  
+  <!-- New Life Circle -->
+  <circle cx="200" cy="150" r="5" fill="#ff4757" opacity="0.9">
+     <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Glow -->
+  <circle cx="200" cy="150" r="80" fill="url(#repro-glow)" opacity="0.25"/>
+</svg>

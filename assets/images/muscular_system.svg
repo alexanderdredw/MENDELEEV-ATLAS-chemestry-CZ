@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="muscle-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ff4d4d" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Muscle fibers -->
+  <path d="M150,80 Q200,150 150,220" stroke="#ff4d4d" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M160,85 Q210,150 160,215" stroke="#ff4d4d" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M170,90 Q220,150 170,210" stroke="#ff4d4d" stroke-width="3" fill="none" opacity="0.6"/>
+  
+  <path d="M250,80 Q200,150 250,220" stroke="#ff4d4d" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M240,85 Q190,150 240,215" stroke="#ff4d4d" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M230,90 Q180,150 230,210" stroke="#ff4d4d" stroke-width="3" fill="none" opacity="0.6"/>
+
+  <!-- Core -->
+  <ellipse cx="200" cy="150" rx="30" ry="80" fill="#ff4d4d" opacity="0.2"/>
+  
+  <!-- Glow -->
+  <circle cx="200" cy="150" r="100" fill="url(#muscle-glow)" opacity="0.3"/>
+</svg>

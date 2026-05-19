@@ -1,0 +1,173 @@
+/* css/scientists.css */
+.scientists-section {
+    background: radial-gradient(circle at top right, rgba(253, 224, 71, 0.05), transparent 60%);
+    min-height: 100vh;
+}
+
+.timeline-viz {
+    width: 100%;
+    margin-bottom: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hide scrollbar but allow scrolling for timeline */
+.timeline-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.scientist-card {
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.scientist-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(253, 224, 71, 0.1);
+    border-color: rgba(253, 224, 71, 0.6) !important;
+}
+
+.scientist-card .card-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.timeline-point:hover .timeline-dot {
+    transform: scale(1.5);
+    background: #FDE047;
+    box-shadow: 0 0 20px #FDE047;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.8rem !important;
+    }
+    .timeline-wrapper {
+        padding: 40px 20px !important;
+    }
+}
+
+/* Detailed Scientist Content Styling */
+.scientist-details {
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', sans-serif;
+}
+
+.scientist-tagline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #FDE047;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 20px rgba(253, 224, 71, 0.2);
+}
+
+.scientist-quote {
+    border-left: 3px solid #FDE047;
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.15rem;
+    background: linear-gradient(to right, rgba(253, 224, 71, 0.08), transparent);
+    border-radius: 0 12px 12px 0;
+}
+
+.scientist-details h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.scientist-details p {
+    margin-bottom: 1.2rem;
+    opacity: 0.9;
+}
+
+.highlight-box {
+    background: rgba(253, 224, 71, 0.03);
+    border: 1px solid rgba(253, 224, 71, 0.15);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin: 2rem 0;
+    backdrop-filter: blur(10px);
+}
+
+.highlight-box strong {
+    color: #FDE047;
+    display: block;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.scientist-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.scientist-details li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.scientist-details li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #FDE047;
+    font-weight: bold;
+}
+
+.scientist-details b {
+    color: #FDE047;
+    font-weight: 600;
+}
+
+/* Make the scientist portrait cards larger and more elongated */
+#scientists-grid {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    max-width: 1600px;
+    gap: 30px;
+}
+
+.scientist-card .card-visual {
+    height: 240px; /* Taller, beautifully elongated scientific portraits */
+    transition: all 0.5s ease;
+}
+
+.scientist-card .card-title {
+    font-size: 1.4rem !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.scientist-card .card-desc {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    min-height: 3.5em !important;
+}
+
+@media (max-width: 768px) {
+    #scientists-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .scientist-card .card-visual {
+        height: 220px;
+    }
+}
+
+

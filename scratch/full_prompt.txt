@@ -1,0 +1,19 @@
+﻿<USER_REQUEST>
+Use the existing Glossary section structure and preserve the CURRENT design system exactly as it already exists on the website.
+
+IMPORTANT:
+- DO NOT redesign the glossary.
+- DO NOT change the existing visual identity.
+- DO NOT modify the current UI/UX philosophy.
+- Preserve all current styles, spacing, typography, colors, animations, shadows, pill buttons, section hierarchy, hover effects, borders, and responsive behavior.
+- Keep the same premium dark educational platform aesthetic.
+- Only replace the glossary CONTENT and category structure with the new Chemistry glossary content I provide below.
+
+YOUR TASK:
+- Rebuild the glossary using the SAME layout and interaction logic as the current glossary.
+- Keep the same navigation pill system at the top.
+- Keep the same section structure and glossary item formatting.
+- Keep the same spacing and typography rhythm.
+- Preserve smooth scrolling behavior between categories.
+- Preserve responsive mobile/tablet/desktop behavior.
+<truncated 7174 bytes>

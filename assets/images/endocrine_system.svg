@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="endo-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Silhouette Head/Torso Hint -->
+  <path d="M200,50 Q230,50 240,90 Q240,130 200,130 Q160,130 160,90 Q170,50 200,50" stroke="#444" stroke-width="2" fill="none" opacity="0.3"/>
+  <path d="M200,130 L200,250" stroke="#444" stroke-width="2" fill="none" opacity="0.3"/>
+  
+  <!-- Pituitary (Head) -->
+  <circle cx="200" cy="85" r="4" fill="#ffd700">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Thyroid (Neck) -->
+  <path d="M190,145 Q200,155 210,145 Q210,155 190,155 Z" fill="#ffd700" opacity="0.8"/>
+  
+  <!-- Adrenals (Torso) -->
+  <path d="M185,200 L195,190 L205,200" fill="#ffd700" opacity="0.8"/>
+  
+  <!-- Pancreas -->
+  <ellipse cx="200" cy="210" rx="15" ry="5" fill="#ffd700" opacity="0.7"/>
+
+  <!-- Connection Lines -->
+  <line x1="200" y1="89" x2="200" y2="140" stroke="#ffd700" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+  <line x1="200" y1="155" x2="200" y2="190" stroke="#ffd700" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+
+  <!-- Glow -->
+  <circle cx="200" cy="150" r="100" fill="url(#endo-glow)" opacity="0.2"/>
+</svg>

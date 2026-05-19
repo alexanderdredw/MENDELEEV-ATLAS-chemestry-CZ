@@ -1,0 +1,19 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#050505"/>
+  <rect x="10" y="10" width="780" height="580" stroke="#D4AF37" stroke-width="2" stroke-opacity="0.3"/>
+  
+  <!-- Stylized Muscle Fiber Pattern -->
+  <path d="M100 100 Q 400 50 700 100" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+  <path d="M100 150 Q 400 100 700 150" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+  <path d="M100 200 Q 400 150 700 200" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+  <path d="M100 250 Q 400 200 700 250" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.2" fill="none"/>
+  
+  <circle cx="400" cy="300" r="120" stroke="#D4AF37" stroke-width="2"/>
+  <circle cx="400" cy="300" r="110" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="10 5"/>
+  
+  <text x="400" y="290" fill="#D4AF37" font-family="serif" font-size="24" text-anchor="middle" letter-spacing="4">MUSCULAR</text>
+  <text x="400" y="330" fill="#D4AF37" font-family="serif" font-size="32" font-weight="bold" text-anchor="middle" letter-spacing="2">STRUCTURE</text>
+  
+  <text x="400" y="450" fill="#888" font-family="sans-serif" font-size="14" text-anchor="middle" letter-spacing="1">IMAGE GENERATING...</text>
+  <text x="400" y="470" fill="#555" font-family="sans-serif" font-size="12" text-anchor="middle">(System Quota Active)</text>
+</svg>

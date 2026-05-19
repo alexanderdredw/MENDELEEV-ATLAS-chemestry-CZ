@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="digest-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ff9f43" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Stomach -->
+  <path d="M180,100 Q240,100 230,140 Q220,180 190,160 Q150,140 180,100" stroke="#ff9f43" stroke-width="3" fill="none" opacity="0.8"/>
+  
+  <!-- Intestines -->
+  <path d="M190,160 Q170,180 190,200 Q210,180 230,200 Q250,220 210,240 Q170,220 190,160" stroke="#ff9f43" stroke-width="3" fill="none" opacity="0.7"/>
+
+  <!-- Glow -->
+  <circle cx="200" cy="170" r="90" fill="url(#digest-glow)" opacity="0.25"/>
+</svg>

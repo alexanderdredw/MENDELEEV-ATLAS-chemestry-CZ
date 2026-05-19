@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background-color: #1a1a1a;">
+  <defs>
+    <radialGradient id="nerve-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Brain hint -->
+  <path d="M170,80 C150,60 250,60 230,80 C260,100 140,100 170,80" stroke="#ffd700" stroke-width="2" fill="none" opacity="0.8"/>
+  
+  <!-- Spinal Cord -->
+  <line x1="200" y1="100" x2="200" y2="250" stroke="#ffd700" stroke-width="4" opacity="0.6"/>
+  
+  <!-- Nerves -->
+  <path d="M200,120 L150,140" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M200,120 L250,140" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M200,150 L140,180" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M200,150 L260,180" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M200,180 L160,220" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  <path d="M200,180 L240,220" stroke="#ffd700" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Nodes -->
+  <circle cx="200" cy="120" r="3" fill="#ffd700"/>
+  <circle cx="200" cy="150" r="3" fill="#ffd700"/>
+  <circle cx="200" cy="180" r="3" fill="#ffd700"/>
+
+  <!-- Glow -->
+  <circle cx="200" cy="120" r="80" fill="url(#nerve-glow)" opacity="0.3"/>
+</svg>
