@@ -17,6 +17,9 @@
             // Short delay to ensure DOM is ready
             setTimeout(() => {
                 window.initScientistsTimeline('timeline-container', 'scientists-grid');
+                if (window.initScientistsQuiz) {
+                    window.initScientistsQuiz('scientists-quiz-container');
+                }
             }, 50);
         }
     });
@@ -215,8 +218,7 @@
         card.className = 'anatomy-card scientist-card fade-in-up';
         card.style.borderColor = '#FDE04740';
 
-        const isZoomedSci = sci.id === 'bohr' || sci.id === 'pauling';
-        const imgFitStyle = isZoomedSci ? 'object-fit:contain; background:#060401;' : 'object-fit:cover; object-position:center 10%;';
+        const imgFitStyle = 'object-fit:contain; background:transparent;';
 
         // Portrait visual: load clean image if available, otherwise show SVG placeholder
         const portraitHtml = `
@@ -229,6 +231,11 @@
                         position:absolute;top:0;left:0;width:100%;height:100%;
                         background:#060401;
                     "></div>
+                    <img class="sci-portrait-blur-bg" src="${sci.image}"
+                        style="position:absolute;top:-10%;left:-10%;width:120%;height:120%;
+                        object-fit:cover;
+                        filter:blur(20px) brightness(0.4);
+                        opacity:0.8;">
                     <img class="sci-portrait-img" src="${sci.image}"
                         alt="${t(sci.titleKey, sci.id)}"
                         style="position:absolute;top:0;left:0;width:100%;height:100%;

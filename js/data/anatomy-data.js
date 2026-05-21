@@ -2027,6 +2027,54 @@ window.anatomyData = [
             studyKey: ['ai.pauling.study.1', 'ai.pauling.study.2', 'ai.pauling.study.3', 'ai.pauling.study.4', 'ai.pauling.study.5'],
             questions: []
         }
+    },
+    {
+        id: 'nobel',
+        atomicNumber: 1867,
+        symbol: 'АН',
+        group: 'Scientist',
+        groupKey: 'scientist',
+        titleKey: 'system.nobel.title',
+        descKey: 'system.nobel.desc',
+        detailsKey: 'system.nobel.details',
+        factKey: 'system.nobel.fact',
+        model: null,
+        image: 'assets/images/scientists/nobel_lux.jpg',
+        color: '#FDE047',
+        layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
+        resources: [
+            { text: 'Wikipedia: Nobel', textKey: 'resource.wiki.nobel', url: 'https://en.wikipedia.org/wiki/Alfred_Nobel' }
+        ],
+        ai: {
+            simpleKey: 'ai.nobel.simple',
+            detailedKey: 'ai.nobel.detailed',
+            studyKey: ['ai.nobel.study.1', 'ai.nobel.study.2', 'ai.nobel.study.3', 'ai.nobel.study.4', 'ai.nobel.study.5'],
+            questions: []
+        }
+    },
+    {
+        id: 'hodgkin',
+        atomicNumber: 1964,
+        symbol: 'ДХ',
+        group: 'Scientist',
+        groupKey: 'scientist',
+        titleKey: 'system.hodgkin.title',
+        descKey: 'system.hodgkin.desc',
+        detailsKey: 'system.hodgkin.details',
+        factKey: 'system.hodgkin.fact',
+        model: null,
+        image: 'assets/images/scientists/hodgkin_lux.jpg',
+        color: '#FDE047',
+        layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
+        resources: [
+            { text: 'Wikipedia: Hodgkin', textKey: 'resource.wiki.hodgkin', url: 'https://en.wikipedia.org/wiki/Dorothy_Hodgkin' }
+        ],
+        ai: {
+            simpleKey: 'ai.hodgkin.simple',
+            detailedKey: 'ai.hodgkin.detailed',
+            studyKey: ['ai.hodgkin.study.1', 'ai.hodgkin.study.2', 'ai.hodgkin.study.3', 'ai.hodgkin.study.4', 'ai.hodgkin.study.5'],
+            questions: []
+        }
     }
 ];
 

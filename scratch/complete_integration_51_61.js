@@ -6,69 +6,69 @@ const elements = {
     symbol: 'Sb',
     number: 51,
     mass: '121.76',
-    group: { en: 'Metalloids', ru: 'Металлоиды', kk: 'Металлоидтар' },
+    group: { en: 'Semimetals', ru: 'Полуметаллы', kk: 'Полуметаллытар' },
     en: {
       title: 'Antimony',
-      desc: 'A lustrous grey metalloid used in flame retardants and alloys.',
+      desc: 'A lustrous grey semimetal used in flame retardants and alloys.',
       fact: 'Antimony expands as it freezes, a rare property it shares with water and bismuth.',
-      details: '<b>Basic Facts</b><br>• Symbol: Sb • Number: 51 • Mass: 121.76<br>• Metalloid, Period 5, Group 15<br><br><b>Atomic Structure</b><br>• 51 protons, 71 neutrons<br>• Config: [Kr] 4d¹⁰ 5s² 5p³<br><br><b>Properties</b><br>• Silvery, brittle metalloid<br>• Expands on freezing<br>• Toxic in high doses<br><br><b>Applications</b><br>• Flame retardants<br>• Lead-acid battery alloys<br>• Microelectronics (diodes)',
-      ai_simple: 'Antimony (Sb) is element 51, a metalloid known for its use in fireproofing materials.',
+      details: '<b>Basic Facts</b><br>• Symbol: Sb • Number: 51 • Mass: 121.76<br>• Semimetals, Period 5, Group 15<br><br><b>Atomic Structure</b><br>• 51 protons, 71 neutrons<br>• Config: [Kr] 4d¹⁰ 5s² 5p³<br><br><b>Properties</b><br>• Silvery, brittle semimetal<br>• Expands on freezing<br>• Toxic in high doses<br><br><b>Applications</b><br>• Flame retardants<br>• Lead-acid battery alloys<br>• Microelectronics (diodes)',
+      ai_simple: 'Antimony (Sb) is element 51, a semimetal known for its use in fireproofing materials.',
       ai_detailed: 'Antimony is a semiconductor material. Its most stable form is a silvery-blue brittle metal. It is primarily used in the form of antimony trioxide for flame retardants.',
       study: [
         'Atomic number: 51',
         'Chemical symbol: Sb',
-        'Group: Metalloid',
+        'Group: Semimetals',
         'Atomic mass: 121.76',
         'Used in flame retardants'
       ],
       questions: [
         { q: 'What is the atomic number of Antimony?', a: '51', o: ['50', '51', '52', '53'] },
         { q: 'What is the symbol for Antimony?', a: 'Sb', o: ['An', 'At', 'Sb', 'St'] },
-        { q: 'Antimony belongs to which group?', a: 'Metalloids', o: ['Metals', 'Nonmetals', 'Metalloids', 'Noble Gases'] },
+        { q: 'Antimony belongs to which group?', a: 'Semimetals', o: ['Metals', 'Nonmetals', 'Semimetals', 'Noble Gases'] },
         { q: 'What is a unique property of Antimony?', a: 'Expands on freezing', o: ['Highly reactive', 'Expands on freezing', 'Liquid at room temp', 'Invisible'] },
         { q: 'Where is Antimony primarily used?', a: 'Flame retardants', o: ['Food', 'Medicine', 'Flame retardants', 'Clothing'] }
       ]
     },
     ru: {
       title: 'Сурьма',
-      desc: 'Блестящий серый металлоид, используемый в антипиренах и сплавах.',
+      desc: 'Блестящий серый полуметалл, используемый в антипиренах и сплавах.',
       fact: 'Сурьма расширяется при замерзании, что делает её полезной для точного литья.',
-      details: '<b>Основные факты</b><br>• Символ: Sb • Номер: 51 • Масса: 121.76<br>• Металлоид, период 5, группа 15<br><br><b>Атомная структура</b><br>• 51 протон, 71 нейтрон<br>• Конфигурация: [Kr] 4d¹⁰ 5s² 5p³<br><br><b>Свойства</b><br>• Серебристо-белый хрупкий металлоид<br>• Расширяется при затвердевании<br>• Токсична в больших дозах<br><br><b>Применение</b><br>• Антипирены (огнезащита)<br>• Сплавы для аккумуляторов<br>• Полупроводники',
-      ai_simple: 'Сурьма (Sb) — элемент №51, металлоид, известный своим применением в огнестойких материалах.',
+      details: '<b>Основные факты</b><br>• Символ: Sb • Номер: 51 • Масса: 121.76<br>• Полуметаллы, период 5, группа 15<br><br><b>Атомная структура</b><br>• 51 протон, 71 нейтрон<br>• Конфигурация: [Kr] 4d¹⁰ 5s² 5p³<br><br><b>Свойства</b><br>• Серебристо-белый хрупкий полуметалл<br>• Расширяется при затвердевании<br>• Токсична в больших дозах<br><br><b>Применение</b><br>• Антипирены (огнезащита)<br>• Сплавы для аккумуляторов<br>• Полупроводники',
+      ai_simple: 'Сурьма (Sb) — элемент №51, полуметалл, известный своим применением в огнестойких материалах.',
       ai_detailed: 'Сурьма — это полупроводниковый материал. Её наиболее стабильная форма — серебристо-голубой хрупкий металл. В основном используется в виде триоксида сурьмы для антипиренов.',
       study: [
         'Атомный номер: 51',
         'Химический символ: Sb',
-        'Группа: Металлоиды',
+        'Группа: Полуметаллы',
         'Атомная масса: 121.76',
         'Используется в антипиренах'
       ],
       questions: [
         { q: 'Какой атомный номер у сурьмы?', a: '51', o: ['50', '51', '52', '53'] },
         { q: 'Какой символ у сурьмы?', a: 'Sb', o: ['An', 'At', 'Sb', 'St'] },
-        { q: 'К какой группе относится сурьма?', a: 'Металлоиды', o: ['Металлы', 'Неметаллы', 'Металлоиды', 'Благородные газы'] },
+        { q: 'К какой группе относится сурьма?', a: 'Полуметаллы', o: ['Металлы', 'Неметаллы', 'Полуметаллы', 'Благородные газы'] },
         { q: 'Какое уникальное свойство у сурьмы?', a: 'Расширяется при замерзании', o: ['Высокая реактивность', 'Расширяется при замерзании', 'Жидкая при комнатной темп.', 'Невидимость'] },
         { q: 'Где в основном используется сурьма?', a: 'Антипирены', o: ['Пища', 'Медицина', 'Антипирены', 'Одежда'] }
       ]
     },
     kk: {
       title: 'Сурьма',
-      desc: 'Антипирендер мен қорытпаларда қолданылатын жылтыр сұр металлоид.',
+      desc: 'Антипирендер мен қорытпаларда қолданылатын жылтыр сұр полуметалл.',
       fact: 'Сурьма қатып қалғанда кеңейеді, бұл оны дәл құю үшін пайдалы етеді.',
-      details: '<b>Негізгі фактілер</b><br>• Таңбасы: Sb • Нөмірі: 51 • Массасы: 121.76<br>• Металлоид, 5-период, 15-топ<br><br><b>Атомдық құрылымы</b><br>• 51 протон, 71 нейтрон<br>• Конфиг: [Kr] 4d¹⁰ 5s² 5p³<br><br><b>Қасиеттері</b><br>• Күміс түсті, морт металлоид<br>• Қатқанда кеңейеді<br>• Жоғары дозада улы<br><br><b>Қолданылуы</b><br>• Антипирендер (өрттен қорғау)<br>• Аккумулятор қорытпалары<br>• Жартылай өткізгіштер',
-      ai_simple: 'Сурьма (Sb) — №51 элемент, отқа төзімді материалдарда қолданылуымен танымал металлоид.',
+      details: '<b>Негізгі фактілер</b><br>• Таңбасы: Sb • Нөмірі: 51 • Массасы: 121.76<br>• Полуметаллы, 5-период, 15-топ<br><br><b>Атомдық құрылымы</b><br>• 51 протон, 71 нейтрон<br>• Конфиг: [Kr] 4d¹⁰ 5s² 5p³<br><br><b>Қасиеттері</b><br>• Күміс түсті, морт полуметалл<br>• Қатқанда кеңейеді<br>• Жоғары дозада улы<br><br><b>Қолданылуы</b><br>• Антипирендер (өрттен қорғау)<br>• Аккумулятор қорытпалары<br>• Жартылай өткізгіштер',
+      ai_simple: 'Сурьма (Sb) — №51 элемент, отқа төзімді материалдарда қолданылуымен танымал полуметалл.',
       ai_detailed: 'Сурьма — жартылай өткізгіш материал. Оның ең тұрақты түрі — күміс-көк түсті морт металл. Негізінен антипирендер үшін сурьма триоксиді түрінде қолданылады.',
       study: [
         'Атомдық нөмірі: 51',
         'Химиялық таңбасы: Sb',
-        'Тобы: Металлоидтар',
+        'Тобы: Полуметаллытар',
         'Атомдық массасы: 121.76',
         'Антипирендерде қолданылады'
       ],
       questions: [
         { q: 'Сурьманың атомдық нөмірі қандай?', a: '51', o: ['50', '51', '52', '53'] },
         { q: 'Сурьманың таңбасы қандай?', a: 'Sb', o: ['An', 'At', 'Sb', 'St'] },
-        { q: 'Сурьма қай топқа жатады?', a: 'Металлоидтар', o: ['Металдар', 'Бейметалдар', 'Металлоидтар', 'Инертті газдар'] },
+        { q: 'Сурьма қай топқа жатады?', a: 'Полуметаллытар', o: ['Металдар', 'Бейметалдар', 'Полуметаллытар', 'Инертті газдар'] },
         { q: 'Сурьманың қандай ерекше қасиеті бар?', a: 'Қатқанда кеңейеді', o: ['Жоғары реактивтілік', 'Қатқанда кеңейеді', 'Сұйық күйде болады', 'Көрінбейді'] },
         { q: 'Сурьма негізінен қайда қолданылады?', a: 'Антипирендер', o: ['Тамақ', 'Медицина', 'Антипирендер', 'Киім'] }
       ]
@@ -78,18 +78,18 @@ const elements = {
     symbol: 'Te',
     number: 52,
     mass: '127.60',
-    group: { en: 'Metalloids', ru: 'Металлоиды', kk: 'Металлоидтар' },
+    group: { en: 'Semimetals', ru: 'Полуметаллы', kk: 'Полуметаллытар' },
     en: {
       title: 'Tellurium',
-      desc: 'A rare, silvery-white metalloid used in solar panels and memory devices.',
+      desc: 'A rare, silvery-white semimetal used in solar panels and memory devices.',
       fact: 'Exposure to tellurium can cause your breath to smell like garlic for weeks.',
-      details: '<b>Basic Facts</b><br>• Symbol: Te • Number: 52 • Mass: 127.60<br>• Metalloid, Period 5, Group 16<br><br><b>Atomic Structure</b><br>• 52 protons, 76 neutrons<br>• Config: [Kr] 4d¹⁰ 5s² 5p⁴<br><br><b>Properties</b><br>• Silvery-white, brittle metalloid<br>• Semiconductor properties<br>• Extremely rare in Earth\'s crust<br><br><b>Applications</b><br>• Solar cells (CdTe)<br>• Rewritable CDs/DVDs<br>• Steel and copper alloys',
+      details: '<b>Basic Facts</b><br>• Symbol: Te • Number: 52 • Mass: 127.60<br>• Semimetals, Period 5, Group 16<br><br><b>Atomic Structure</b><br>• 52 protons, 76 neutrons<br>• Config: [Kr] 4d¹⁰ 5s² 5p⁴<br><br><b>Properties</b><br>• Silvery-white, brittle semimetal<br>• Semiconductor properties<br>• Extremely rare in Earth\'s crust<br><br><b>Applications</b><br>• Solar cells (CdTe)<br>• Rewritable CDs/DVDs<br>• Steel and copper alloys',
       ai_simple: 'Tellurium (Te) is element 52, essential for high-efficiency thin-film solar panels.',
       ai_detailed: 'Tellurium is a p-type semiconductor. It is chemically related to selenium and sulfur. Its primary industrial use is in alloying and solar energy.',
       study: [
         'Atomic number: 52',
         'Chemical symbol: Te',
-        'Group: Metalloid',
+        'Group: Semimetals',
         'Atomic mass: 127.60',
         'Used in solar cells'
       ],
@@ -103,15 +103,15 @@ const elements = {
     },
     ru: {
       title: 'Теллур',
-      desc: 'Редкий серебристо-белый металлоид, используемый в солнечных батареях.',
+      desc: 'Редкий серебристо-белый полуметалл, используемый в солнечных батареях.',
       fact: 'При попадании теллура в организм дыхание приобретает стойкий запах чеснока.',
-      details: '<b>Основные факты</b><br>• Символ: Te • Номер: 52 • Масса: 127.60<br>• Металлоид, период 5, группа 16<br><br><b>Атомная структура</b><br>• 52 протона, 76 нейтронов<br>• Конфигурация: [Kr] 4d¹⁰ 5s² 5p⁴<br><br><b>Свойства</b><br>• Серебристо-белый хрупкий металлоид<br>• Полупроводник<br>• Очень редкий элемент в коре<br><br><b>Применение</b><br>• Солнечные элементы (CdTe)<br>• Перезаписываемые диски<br>• Сплавы стали и меди',
+      details: '<b>Основные факты</b><br>• Символ: Te • Номер: 52 • Масса: 127.60<br>• Полуметаллы, период 5, группа 16<br><br><b>Атомная структура</b><br>• 52 протона, 76 нейтронов<br>• Конфигурация: [Kr] 4d¹⁰ 5s² 5p⁴<br><br><b>Свойства</b><br>• Серебристо-белый хрупкий полуметалл<br>• Полупроводник<br>• Очень редкий элемент в коре<br><br><b>Применение</b><br>• Солнечные элементы (CdTe)<br>• Перезаписываемые диски<br>• Сплавы стали и меди',
       ai_simple: 'Теллур (Te) — элемент №52, необходим для высокоэффективных солнечных панелей.',
       ai_detailed: 'Теллур — полупроводник p-типа. Химически близок к селену и сере. Основное промышленное применение — легирование и солнечная энергетика.',
       study: [
         'Атомный номер: 52',
         'Химический символ: Te',
-        'Группа: Металлоиды',
+        'Группа: Полуметаллы',
         'Атомная масса: 127.60',
         'Используется в солнечных панелях'
       ],
@@ -125,15 +125,15 @@ const elements = {
     },
     kk: {
       title: 'Теллур',
-      desc: 'Күн батареяларында қолданылатын сирек күміс-ақ металлоид.',
+      desc: 'Күн батареяларында қолданылатын сирек күміс-ақ полуметалл.',
       fact: 'Теллур ағзаға түскенде, тыныс алу сарымсақтың тұрақты иісіне ие болады.',
-      details: '<b>Негізгі фактілер</b><br>• Таңбасы: Te • Нөмірі: 52 • Массасы: 127.60<br>• Металлоид, 5-период, 16-топ<br><br><b>Атомдық құрылымы</b><br>• 52 протон, 76 нейтрон<br>• Конфиг: [Kr] 4d¹⁰ 5s² 5p⁴<br><br><b>Қасиеттері</b><br>• Күміс-ақ, морт металлоид<br>• Жартылай өткізгіш<br>• Жер қыртысында өте сирек кездеседі<br><br><b>Қолданылуы</b><br>• Күн элементтері (CdTe)<br>• Қайта жазылатын дискілер<br>• Болат пен мыс қорытпалары',
+      details: '<b>Негізгі фактілер</b><br>• Таңбасы: Te • Нөмірі: 52 • Массасы: 127.60<br>• Полуметаллы, 5-период, 16-топ<br><br><b>Атомдық құрылымы</b><br>• 52 протон, 76 нейтрон<br>• Конфиг: [Kr] 4d¹⁰ 5s² 5p⁴<br><br><b>Қасиеттері</b><br>• Күміс-ақ, морт полуметалл<br>• Жартылай өткізгіш<br>• Жер қыртысында өте сирек кездеседі<br><br><b>Қолданылуы</b><br>• Күн элементтері (CdTe)<br>• Қайта жазылатын дискілер<br>• Болат пен мыс қорытпалары',
       ai_simple: 'Теллур (Te) — №52 элемент, жоғары тиімді күн панельдері үшін қажет.',
       ai_detailed: 'Теллур — p-типті жартылай өткізгіш. Химиялық жағынан селен мен күкіртке жақын. Негізгі өнеркәсіптік қолданылуы — легирлеу және күн энергетикасы.',
       study: [
         'Атомдық нөмірі: 52',
         'Химиялық таңбасы: Te',
-        'Тобы: Металлоидтар',
+        'Тобы: Полуметаллытар',
         'Атомтық массасы: 127.60',
         'Күн панельдерінде қолданылады'
       ],

@@ -4,7 +4,7 @@ const ruB = `<b>Основные факты</b><br>
 • Химический символ — B<br>
 • Атомный номер — 5<br>
 • Атомная масса — 10.81<br>
-• Группа — Металлоиды<br>
+• Группа — Полуметаллы<br>
 • Единственный неметаллический элемент в 13-й группе<br>
 • Чрезвычайно твердый и тугоплавкий элемент<br><br>
 
@@ -65,7 +65,7 @@ const enB = `<b>Basic Facts</b><br>
 • Chemical Symbol — B<br>
 • Atomic Number — 5<br>
 • Atomic Mass — 10.81<br>
-• Group — Metalloids<br>
+• Group — Semimetals<br>
 • The only non-metallic element in group 13<br>
 • Extremely hard and heat-resistant element<br><br>
 
@@ -126,7 +126,7 @@ const kkB = `<b>Негізгі фактілер</b><br>
 • Химиялық таңбасы — B<br>
 • Атомдық нөмірі — 5<br>
 • Атомдық массасы — 10.81<br>
-• Тобы — Металлоидтар<br>
+• Тобы — Полуметаллытар<br>
 • 13-топтағы жалғыз бейметалл элемент<br>
 • Өте қатты және отқа төзімді элемент<br><br>
 
@@ -194,7 +194,7 @@ for (const [lang, data] of Object.entries(locales)) {
   locale['system.boron.details'] = data.content;
   locale['system.boron.title'] = lang === 'ru' ? 'Бор' : (lang === 'kk' ? 'Бор' : 'Boron');
   // Boron uses 'boron' ID directly, but check if any legacy key was mapped
-  locale['system.boron.desc'] = locale['system.boron.desc'] || 'Metalloid element';
+  locale['system.boron.desc'] = locale['system.boron.desc'] || 'Semimetals element';
   locale['system.boron.fact'] = locale['system.boron.fact'] || 'Hardest after diamond';
   
   fs.writeFileSync(data.path, JSON.stringify(locale, null, 4));

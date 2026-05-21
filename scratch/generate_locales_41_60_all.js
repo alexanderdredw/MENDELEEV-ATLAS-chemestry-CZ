@@ -11,8 +11,8 @@ const elements = [
     { id: 'cadmium', symbol: 'Cd', number: 48, mass: '112.41', group: 'Transition Metal', nameEn: 'Cadmium', nameRu: 'Кадмий', nameKk: 'Кадмий' },
     { id: 'indium', symbol: 'In', number: 49, mass: '114.82', group: 'Post-Transition Metal', nameEn: 'Indium', nameRu: 'Индий', nameKk: 'Индий' },
     { id: 'tin', symbol: 'Sn', number: 50, mass: '118.71', group: 'Post-Transition Metal', nameEn: 'Tin', nameRu: 'Олово', nameKk: 'Қалайы' },
-    { id: 'antimony', symbol: 'Sb', number: 51, mass: '121.76', group: 'Metalloid', nameEn: 'Antimony', nameRu: 'Сурьма', nameKk: 'Сүрме' },
-    { id: 'tellurium', symbol: 'Te', number: 52, mass: '127.6', group: 'Metalloid', nameEn: 'Tellurium', nameRu: 'Теллур', nameKk: 'Теллур' },
+    { id: 'antimony', symbol: 'Sb', number: 51, mass: '121.76', group: 'Semimetals', nameEn: 'Antimony', nameRu: 'Сурьма', nameKk: 'Сүрме' },
+    { id: 'tellurium', symbol: 'Te', number: 52, mass: '127.6', group: 'Semimetals', nameEn: 'Tellurium', nameRu: 'Теллур', nameKk: 'Теллур' },
     { id: 'iodine', symbol: 'I', number: 53, mass: '126.9', group: 'Halogen', nameEn: 'Iodine', nameRu: 'Иод', nameKk: 'Йод' },
     { id: 'xenon', symbol: 'Xe', number: 54, mass: '131.29', group: 'Noble Gas', nameEn: 'Xenon', nameRu: 'Ксенон', nameKk: 'Ксенон' },
     { id: 'cesium', symbol: 'Cs', number: 55, mass: '132.91', group: 'Alkali Metal', nameEn: 'Cesium', nameRu: 'Цезий', nameKk: 'Цезий' },
@@ -25,8 +25,8 @@ const elements = [
 
 const groups = {
     'Transition Metal': { en: 'Transition Metal', ru: 'Переходный металл', kk: 'Өтпелі металл' },
-    'Post-Transition Metal': { en: 'Post-Transition Metal', ru: 'Постпереходный металл', kk: 'Постөтпелі металл' },
-    'Metalloid': { en: 'Metalloid', ru: 'Металлоид', kk: 'Металлоид' },
+    'Post-Transition Metal': { en: 'Post-Transition Metal', ru: 'Другой металл', kk: 'Постөтпелі металл' },
+    'Semimetals': { en: 'Semimetals', ru: 'Полуметаллы', kk: 'Полуметаллы' },
     'Nonmetal': { en: 'Nonmetal', ru: 'Неметалл', kk: 'Бейметалл' },
     'Halogen': { en: 'Halogen', ru: 'Галоген', kk: 'Галоген' },
     'Noble Gas': { en: 'Noble Gas', ru: 'Благородный газ', kk: 'Инертті газ' },

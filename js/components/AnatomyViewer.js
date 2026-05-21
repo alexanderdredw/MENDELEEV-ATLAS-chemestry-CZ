@@ -212,38 +212,43 @@
                 opacity: 0;
                 transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 display: flex;
-                justify-content: flex-end;
+                align-items: center;
+                justify-content: center;
             }
 
             .explore-drawer-overlay.active {
                 opacity: 1;
             }
 
-            /* Slide-out Drawer Panel */
+            /* Fully Opened Dashboard Panel on Desktop & Tablet */
             .explore-drawer-panel {
-                width: 440px;
-                max-width: 100%;
-                height: 100%;
-                background: rgba(10, 10, 16, 0.92);
-                border-left: 1px solid rgba(255, 255, 255, 0.08);
-                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
-                padding: 40px 30px;
+                width: 90%;
+                max-width: 1100px;
+                height: auto;
+                max-height: 85vh;
+                background: rgba(10, 10, 16, 0.94);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 28px;
+                box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+                padding: 40px;
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
-                transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                transform: scale(0.95) translateY(20px);
+                opacity: 0;
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 position: relative;
             }
 
             body.theme-light .explore-drawer-panel {
-                background: rgba(250, 250, 252, 0.95);
-                border-left-color: rgba(0, 0, 0, 0.08);
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+                background: rgba(250, 250, 252, 0.96);
+                border-color: rgba(0, 0, 0, 0.08);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
             }
 
             .explore-drawer-overlay.active .explore-drawer-panel {
-                transform: translateX(0);
+                transform: scale(1) translateY(0);
+                opacity: 1;
             }
 
             /* Close Button */
@@ -257,10 +262,10 @@
                 background: rgba(255, 255, 255, 0.05);
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 color: var(--text-primary, #ffffff);
-                font-size: 1.2rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                padding: 0;
                 cursor: pointer;
                 transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             }
@@ -312,13 +317,13 @@
                 color: #6e6e73;
             }
 
-            /* Items List container */
+            /* Items List container (Grid on Desktop/Tablet) */
             .explore-drawer-list {
                 flex: 1;
                 overflow-y: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 16px;
                 padding-right: 4px;
                 scrollbar-width: thin;
                 scrollbar-color: rgba(255,255,255,0.1) transparent;
@@ -451,21 +456,37 @@
                 color: #1d1d1f;
             }
 
-            @media (max-width: 500px) {
+            /* Mobile (L, M, S Phone sizes) bottom sheet adaptation */
+            @media (max-width: 768px) {
+                .explore-drawer-overlay {
+                    align-items: flex-end !important;
+                    justify-content: flex-end !important;
+                }
+
                 .explore-drawer-panel {
-                    width: 100%;
-                    border-left: none;
-                    border-top: 1px solid rgba(255, 255, 255, 0.08);
-                    height: 85%;
-                    margin-top: auto;
-                    transform: translateY(100%);
-                    border-top-left-radius: 24px;
-                    border-top-right-radius: 24px;
-                    padding: 30px 20px;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: 85% !important;
+                    max-height: 85vh !important;
+                    border-radius: 24px 24px 0 0 !important;
+                    border: none !important;
+                    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+                    transform: translateY(100%) !important;
+                    margin-top: auto !important;
+                    padding: 30px 20px !important;
+                    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4) !important;
                 }
 
                 .explore-drawer-overlay.active .explore-drawer-panel {
-                    transform: translateY(0);
+                    transform: translateY(0) !important;
+                    opacity: 1 !important;
+                }
+
+                /* Restore vertical single-column layout on phone sizes */
+                .explore-drawer-list {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    gap: 12px !important;
                 }
             }
         `;
@@ -483,7 +504,7 @@
 
         const closeBtn = document.createElement('button');
         closeBtn.className = 'explore-drawer-close';
-        closeBtn.innerHTML = '&times;';
+        closeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
 
         const header = document.createElement('div');
         header.className = 'explore-drawer-header';

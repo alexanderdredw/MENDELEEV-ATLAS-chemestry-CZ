@@ -74,21 +74,21 @@ const elementsData = {
         }
     },
     silicon: {
-        symbol: "Si", num: 14, mass: 28.09, group: "Metalloids",
+        symbol: "Si", num: 14, mass: 28.09, group: "Semimetals",
         ru: {
             title: "Кремний",
             desc: "Основа современной электроники и второй по распространенности элемент в земной коре.",
-            details: "<b>Основные факты</b><br>• Символ: Si • Атомный номер: 14 • Атомная масса: 28.09<br>• Металлоид с характерным металлическим блеском<br><br><b>Свойства</b><br>• Полупроводник: его проводимость зависит от температуры и примесей<br>• Очень твердый, но хрупкий материал<br><br><b>Нахождение в природе</b><br>• В виде песка (SiO₂) и различных силикатов<br>• Составляет основу камней, глины и песка<br><br><b>Применение</b><br>• Микросхемы и процессоры (Кремниевая долина)<br>• Солнечные батареи<br>• Стекло и керамика<br>• Силиконы (полимеры на основе кремния)"
+            details: "<b>Основные факты</b><br>• Символ: Si • Атомный номер: 14 • Атомная масса: 28.09<br>• Полуметаллы с характерным металлическим блеском<br><br><b>Свойства</b><br>• Полупроводник: его проводимость зависит от температуры и примесей<br>• Очень твердый, но хрупкий материал<br><br><b>Нахождение в природе</b><br>• В виде песка (SiO₂) и различных силикатов<br>• Составляет основу камней, глины и песка<br><br><b>Применение</b><br>• Микросхемы и процессоры (Кремниевая долина)<br>• Солнечные батареи<br>• Стекло и керамика<br>• Силиконы (полимеры на основе кремния)"
         },
         en: {
             title: "Silicon",
             desc: "The foundation of modern electronics and the second most abundant element in the Earth's crust.",
-            details: "<b>Basic Facts</b><br>• Symbol: Si • Atomic Number: 14 • Atomic Mass: 28.09<br>• Metalloid with a characteristic metallic luster<br><br><b>Properties</b><br>• Semiconductor: its conductivity depends on temperature and impurities<br>• Very hard but brittle material<br><br><b>Occurrence in Nature</b><br>• In the form of sand (SiO₂) and various silicates<br>• Forms the basis of stones, clay, and sand<br><br><b>Applications</b><br>• Microchips and processors (Silicon Valley)<br>• Solar panels<br>• Glass and ceramics<br>• Silicones (silicon-based polymers)"
+            details: "<b>Basic Facts</b><br>• Symbol: Si • Atomic Number: 14 • Atomic Mass: 28.09<br>• Semimetals with a characteristic metallic luster<br><br><b>Properties</b><br>• Semiconductor: its conductivity depends on temperature and impurities<br>• Very hard but brittle material<br><br><b>Occurrence in Nature</b><br>• In the form of sand (SiO₂) and various silicates<br>• Forms the basis of stones, clay, and sand<br><br><b>Applications</b><br>• Microchips and processors (Silicon Valley)<br>• Solar panels<br>• Glass and ceramics<br>• Silicones (silicon-based polymers)"
         },
         kk: {
             title: "Кремний",
             desc: "Қазіргі электрониканың негізі және жер қыртысындағы ең көп таралған екінші элемент.",
-            details: "<b>Негізгі фактілер</b><br>• Таңбасы: Si • Атомдық нөмірі: 14 • Атомдық массасы: 28.09<br>• Металдық жылтыры бар металлоид<br><br><b>Қасиеттері</b><br>• Жартылай өткізгіш: оның өткізгіштігі температура мен қоспаларға байланысты<br>• Өте қатты, бірақ морт материал<br><br><b>Табиғатта кездесуі</b><br>• Құм (SiO₂) және әртүрлі силикаттар түрінде<br>• Тастардың, саздың және құмның негізін құрайды<br><br><b>Қолданылуы</b><br>• Микросхемалар мен процессорлар (Кремний алқабы)<br>• Күн батареялары<br>• Шыны және керамика<br>• Силикондар (кремний негізіндегі полимерлер)"
+            details: "<b>Негізгі фактілер</b><br>• Таңбасы: Si • Атомдық нөмірі: 14 • Атомдық массасы: 28.09<br>• Металдық жылтыры бар полуметалл<br><br><b>Қасиеттері</b><br>• Жартылай өткізгіш: оның өткізгіштігі температура мен қоспаларға байланысты<br>• Өте қатты, бірақ морт материал<br><br><b>Табиғатта кездесуі</b><br>• Құм (SiO₂) және әртүрлі силикаттар түрінде<br>• Тастардың, саздың және құмның негізін құрайды<br><br><b>Қолданылуы</b><br>• Микросхемалар мен процессорлар (Кремний алқабы)<br>• Күн батареялары<br>• Шыны және керамика<br>• Силикондар (кремний негізіндегі полимерлер)"
         }
     },
     phosphorus: {
