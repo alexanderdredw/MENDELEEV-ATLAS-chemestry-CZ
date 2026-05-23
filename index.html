@@ -233,7 +233,7 @@
             <!-- Glossary Section -->
             <section id="view-glossary" class="glossary-section" style="display: none;">
                 <div class="glossary-container fade-in-up">
-                    <h2 class="section-title" data-i18n="glossary.title">Anatomy Glossary</h2>
+                    <h2 class="section-title" data-i18n="glossary.title">Chemistry Glossary</h2>
                     <div class="glossary-content">
                         <p class="glossary-placeholder" data-i18n="glossary.placeholder">Select a term to view its
                             definition. Content coming soon...</p>
@@ -247,7 +247,7 @@
                     <!-- 1. Hero -->
                     <div class="syntara-hero">
                         <h1 class="syntara-title" data-i18n="syntara.title">Syntara AI</h1>
-                        <p class="syntara-subtitle" data-i18n="syntara.subtitle">Your Personal Intelligent Biology
+                        <p class="syntara-subtitle" data-i18n="syntara.subtitle">Your Personal Intelligent Chemistry
                             Assistant</p>
                         <p class="syntara-description" data-i18n="syntara.desc">
                             Syntara analyzes your progress, explains complex concepts clearly, and helps you prepare
@@ -303,9 +303,7 @@
                             </div>
                         </div>
                         <div class="ai-input-area">
-                            <div class="ai-input-bar" data-i18n="syntara.input.example">Eg: Explain how the nervous
-                                system interacts with the muscular
-                                system</div>
+                            <div class="ai-input-bar" data-i18n="syntara.input.example">E.g.: How does carbon form bonds with hydrogen?</div>
 
                             <button class="ai-action-btn send-btn"
                                 style="background: var(--text-primary); color: var(--bg-primary);">
@@ -347,21 +345,21 @@
                     </div>
 
                     <!-- 4. Adaptive Preview -->
-                    <div class="stats-preview-panel">
+                    <div class="stats-preview-panel" id="syntara-stats-panel">
                         <div class="stat-item">
-                            <div class="stat-value">3</div>
+                            <div class="stat-value" id="syntara-stat-weak">0</div>
                             <div class="stat-label" data-i18n="syntara.stat.weak">Weak Areas</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value" data-i18n="syntara.value.nervous">Nervous</div>
+                            <div class="stat-value stat-value-text" id="syntara-stat-rec" data-i18n="syntara.value.nervous">-</div>
                             <div class="stat-label" data-i18n="syntara.stat.rec">Recommended</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value">85%</div>
+                            <div class="stat-value" id="syntara-stat-acc">0%</div>
                             <div class="stat-label" data-i18n="syntara.stat.acc">Accuracy</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value">12m</div>
+                            <div class="stat-value" id="syntara-stat-time">0m</div>
                             <div class="stat-label" data-i18n="syntara.stat.time">Study Time</div>
                         </div>
                     </div>
@@ -637,6 +635,13 @@
         <footer class="main-footer">
             <p data-i18n="footer.copyright">2026 Mendeleev Atlas. Educational Use Only.</p>
         </footer>
+        
+        <!-- Professional Scroll-to-Top Button (Glossary) -->
+        <button id="glossary-scroll-top-btn" class="glossary-scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
     </div>
 
     <!-- Three.js & Extensions -->
@@ -646,7 +651,7 @@
 
     <!-- Scripts (Order Sensitive) -->
     <script src="js/data/anatomy-data.js?v=250"></script>
-    <script src="js/data/anatomy-icons.js?v=250"></script>
+
     <script src="js/data/glossary-data.js?v=250"></script>
     <!-- Effects: Particles restored, Tilt removed -->
     <!-- <script src="js/effects/TiltEffect.js"></script> -->

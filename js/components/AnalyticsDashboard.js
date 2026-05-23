@@ -246,22 +246,37 @@
     }
 
     function calculateStats(logs) {
-        const answerLogs = logs.filter(l => l.event_type === 'question_answered');
+        // Filter out legacy anatomy systems
+        const legacySystems = ['respiratory', 'digestive', 'cardiovascular', 'reproductive', 'nervous', 'muscular', 'integumentary', 'skeletal', 'immune', 'urinary', 'endocrine'];
+        const validLogs = logs.filter(l => !legacySystems.includes(l.system_id) && l.system_id !== 'general' && l.system_id);
+        const answerLogs = validLogs.filter(l => l.event_type === 'question_answered');
         const total = answerLogs.length;
         if (total === 0) return { totalQuestions: 0, accuracy: 0, avgTime: 0, systemBreakdown: {} };
 
         const correct = answerLogs.filter(l => l.is_correct).length;
         const totalTime = answerLogs.reduce((acc, l) => acc + (l.response_time_ms || 0), 0);
 
-        // System Breakdown
+        // System Breakdown by Group
         const systemBreakdown = {};
         answerLogs.forEach(log => {
-            if (!systemBreakdown[log.system_id]) {
-                systemBreakdown[log.system_id] = { total: 0, correct: 0, time: 0 };
+            let groupId = log.system_id;
+            
+            // Map element ID to its groupKey
+            if (window.anatomyData) {
+                const element = window.anatomyData.find(e => String(e.id) === String(log.system_id));
+                if (element && element.groupKey) {
+                    groupId = element.groupKey;
+                } else if (element && element.group) {
+                    groupId = element.group.toLowerCase().replace(/ /g, '_');
+                }
             }
-            systemBreakdown[log.system_id].total++;
-            if (log.is_correct) systemBreakdown[log.system_id].correct++;
-            systemBreakdown[log.system_id].time += (log.response_time_ms || 0);
+
+            if (!systemBreakdown[groupId]) {
+                systemBreakdown[groupId] = { total: 0, correct: 0, time: 0 };
+            }
+            systemBreakdown[groupId].total++;
+            if (log.is_correct) systemBreakdown[groupId].correct++;
+            systemBreakdown[groupId].time += (log.response_time_ms || 0);
         });
 
         return {
@@ -274,12 +289,36 @@
 
     function renderSystemPerformance(breakdown) {
         const t = window.i18n ? window.i18n.t : (k) => k;
-        const systemIds = Object.keys(breakdown);
-        if (systemIds.length === 0) return `<p style="color: var(--text-secondary); text-align: center;">${t('analytics.empty.system')}</p>`;
+        const groupIds = Object.keys(breakdown);
+        if (groupIds.length === 0) return `<p style="color: var(--text-secondary); text-align: center;">${t('analytics.empty.system')}</p>`;
 
-        return systemIds.map(sysId => {
+        // Group Colors mapping matching the explore chips
+        const groupColors = {
+            'nonmetal': '#22c55e',
+            'noble_gas': '#a855f7',
+            'alkali_metal': '#ef4444',
+            'alkaline_earth': '#f97316',
+            'metalloid': '#eab308',
+            'halogen': '#8b5cf6',
+            'post_transition': '#94a3b8',
+            'transition_metal': '#3b82f6',
+            'lanthanide': '#ec4899',
+            'actinide': '#f43f5e'
+        };
+
+        return groupIds.map(sysId => {
             const data = breakdown[sysId];
-            const system = window.getSystemById(sysId) || { title: sysId, color: '#ccc' };
+            
+            // Get proper title and color for the group
+            let title = sysId;
+            let titleColor = groupColors[sysId] || '#ccc';
+            
+            if (window.i18n && window.i18n.t(`group.${sysId}`) !== `group.${sysId}`) {
+                title = window.i18n.t(`group.${sysId}`);
+            } else if (window.anatomyData) {
+                 const element = window.anatomyData.find(e => e.groupKey === sysId);
+                 if (element && element.group) title = element.group;
+            }
             const accuracy = Math.round((data.correct / data.total) * 100);
 
             // Color coding for progress bar
@@ -290,7 +329,7 @@
             return `
                 <div class="system-stat-item">
                     <div class="stat-header">
-                        <span style="font-weight: 600; color: ${system.color};">${system.title}</span>
+                        <span style="font-weight: 600; color: ${titleColor};">${title}</span>
                         <span>${accuracy}% (${data.correct}/${data.total})</span>
                     </div>
                     <div class="progress-bar-bg">
@@ -303,9 +342,11 @@
 
     function renderActivityLog(logs) {
         const t = window.i18n ? window.i18n.t : (k) => k;
-        // Show last 10 'question_answered' events
+        const legacySystems = ['respiratory', 'digestive', 'cardiovascular', 'reproductive', 'nervous', 'muscular', 'integumentary', 'skeletal', 'immune', 'urinary', 'endocrine'];
+        
+        // Show last 10 'question_answered' events for elements
         const recentLogs = logs
-            .filter(l => l.event_type === 'question_answered')
+            .filter(l => l.event_type === 'question_answered' && !legacySystems.includes(l.system_id) && l.system_id !== 'general' && l.system_id)
             .reverse()
             .slice(0, 10);
 

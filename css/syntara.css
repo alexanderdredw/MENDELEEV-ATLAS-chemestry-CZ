@@ -331,43 +331,109 @@ body.theme-light .mode-icon {
     line-height: 1.4;
 }
 
-/* 4. Adaptive Learning Preview */
+/* 4. Adaptive Learning Preview - Professional Dashboard Design */
 .stats-preview-panel {
     width: 100%;
-    background: rgba(20, 20, 20, 0.6);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(20, 20, 20, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
-    padding: 30px;
+    padding: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-preview-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.5), transparent);
 }
 
 body.theme-light .stats-preview-panel {
-    background: rgba(255, 255, 255, 0.6);
-    border-color: rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body.theme-light .stats-preview-panel::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.3), transparent);
 }
 
 .stat-item {
     text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 8px;
+    padding: 24px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+}
+
+body.theme-light .stat-item {
+    background: rgba(0, 0, 0, 0.01);
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+.stat-item:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 122, 255, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 122, 255, 0.15);
+}
+
+body.theme-light .stat-item:hover {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 122, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 122, 255, 0.1);
 }
 
 .stat-value {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--text-primary);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+body.theme-light .stat-value {
+    background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-value-text {
+    font-size: 1.4rem; /* Smaller size for text-based values like system names */
+    word-break: break-word;
+}
+
+.stat-item:hover .stat-value {
+    transform: scale(1.05);
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
 }
 
 /* Responsive Logic */
@@ -477,8 +543,9 @@ body.theme-light .stats-preview-panel {
     }
 
     .stats-preview-panel {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 16px;
     }
 }
 
@@ -514,5 +581,31 @@ body.theme-light .stats-preview-panel {
         width: 40px;
         /* Slightly smaller button */
         height: 40px;
+    }
+
+    /* Small Phone Dashboard Optimizations */
+    .stats-preview-panel {
+        gap: 12px;
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .stat-item {
+        padding: 16px 8px;
+        border-radius: 12px;
+    }
+
+    .stat-value {
+        font-size: 1.6rem;
+    }
+
+    .stat-value-text {
+        font-size: 1rem;
+        line-height: 1.1;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
     }
 }

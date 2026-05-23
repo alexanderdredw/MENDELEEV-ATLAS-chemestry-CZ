@@ -59,6 +59,16 @@
         let score = 0;
         let incorrectIds = [];
         let questionStartTime = Date.now();
+        
+        let consecutiveCorrect = 0;
+        let consecutiveWrong = 0;
+        let currentLevel = 1; // 0: Easy, 1: Medium, 2: Hard
+        
+        function getLevelConfig(level) {
+            if (level === 0) return { key: 'scientists.quiz.level.easy', fallback: 'Easy', color: '#4ADE80', rgb: '74,222,128', distractors: 1 };
+            if (level === 1) return { key: 'scientists.quiz.level.medium', fallback: 'Medium', color: '#FDE047', rgb: '253,224,71', distractors: 3 };
+            return { key: 'scientists.quiz.level.hard', fallback: 'Hard', color: '#F87171', rgb: '248,113,113', distractors: 3 };
+        }
 
         function renderQuestion() {
             if (currentQuestionIndex >= questionQueue.length) {
@@ -69,12 +79,13 @@
 
             questionStartTime = Date.now();
             const currentScientist = questionQueue[currentQuestionIndex];
+            const levelConfig = getLevelConfig(currentLevel);
             
-            // Create options: 1 correct + 3 random incorrect
+            // Create options: 1 correct + distractors based on level
             const distractors = scientists
                 .filter(s => s.id !== currentScientist.id)
                 .sort(() => Math.random() - 0.5)
-                .slice(0, 3);
+                .slice(0, levelConfig.distractors);
             
             const options = shuffleArray([currentScientist, ...distractors]);
 
@@ -91,11 +102,12 @@
                             font-weight: 600; 
                             padding: 4px 12px; 
                             border-radius: 99px; 
-                            background: rgba(253,224,71,0.2); 
-                            color: #FDE047;
-                            border: 1px solid rgba(253,224,71,0.4);
+                            background: rgba(${levelConfig.rgb},0.2); 
+                            color: ${levelConfig.color};
+                            border: 1px solid rgba(${levelConfig.rgb},0.4);
+                            transition: all 0.3s ease;
                         ">
-                            Professional
+                            ${t(levelConfig.key, levelConfig.fallback)}
                         </div>
                     </div>
                     
@@ -123,10 +135,24 @@
 
                     if (isCorrect) {
                         score++;
+                        consecutiveCorrect++;
+                        consecutiveWrong = 0;
+                        if (consecutiveCorrect >= 2) {
+                            currentLevel = Math.min(2, currentLevel + 1);
+                            consecutiveCorrect = 0; // reset to require 2 more correct answers to level up again
+                        }
+                        
                         e.target.style.background = 'var(--success)';
                         e.target.style.color = '#fff';
                         e.target.style.borderColor = 'var(--success)';
                     } else {
+                        consecutiveWrong++;
+                        consecutiveCorrect = 0;
+                        if (consecutiveWrong >= 2) {
+                            currentLevel = Math.max(0, currentLevel - 1);
+                            consecutiveWrong = 0; // reset to require 2 more wrong answers to level down again
+                        }
+
                         e.target.style.background = 'var(--accent-red)';
                         e.target.style.color = '#fff';
                         e.target.style.borderColor = 'var(--accent-red)';

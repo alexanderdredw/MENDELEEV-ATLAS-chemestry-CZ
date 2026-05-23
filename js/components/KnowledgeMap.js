@@ -1,19 +1,7 @@
 /* js/components/KnowledgeMap.js */
 (function () {
-    // Placeholder Data
-    const systemsData = {
-        skeletal: { id: 'skeletal', labelKey: 'system.skeletal.title', progress: 62, status: 'developing', achKeys: ['map.ach.skeletal.1', 'map.ach.skeletal.2'], recKey: 'map.rec.skeletal' },
-        muscular: { id: 'muscular', labelKey: 'system.muscular.title', progress: 48, status: 'weak', achKeys: ['map.ach.muscular.1'], recKey: 'map.rec.muscular' },
-        nervous: { id: 'nervous', labelKey: 'system.nervous.title', progress: 85, status: 'good', achKeys: ['map.ach.nervous.1', 'map.ach.nervous.2'], recKey: 'map.rec.nervous' },
-        cardiovascular: { id: 'cardiovascular', labelKey: 'system.cardiovascular.title', progress: 72, status: 'good', achKeys: ['map.ach.cardio.1', 'map.ach.cardio.2'], recKey: 'map.rec.cardio' },
-        respiratory: { id: 'respiratory', labelKey: 'system.respiratory.title', progress: 91, status: 'mastered', achKeys: ['map.ach.resp.1', 'map.ach.resp.2'], recKey: 'map.rec.resp' },
-        digestive: { id: 'digestive', labelKey: 'system.digestive.title', progress: 55, status: 'developing', achKeys: ['map.ach.digestive.1'], recKey: 'map.rec.digestive' },
-        endocrine: { id: 'endocrine', labelKey: 'system.endocrine.title', progress: 40, status: 'weak', achKeys: [], recKey: 'map.rec.endocrine' },
-        immune: { id: 'immune', labelKey: 'system.immune.title', progress: 65, status: 'developing', achKeys: ['map.ach.immune.1'], recKey: 'map.rec.immune' },
-        urinary: { id: 'urinary', labelKey: 'system.urinary.title', progress: 78, status: 'good', achKeys: ['map.ach.urinary.1'], recKey: 'map.rec.urinary' },
-        reproductive: { id: 'reproductive', labelKey: 'system.reproductive.title', progress: 30, status: 'weak', achKeys: [], recKey: 'map.rec.reproductive' },
-        integumentary: { id: 'integumentary', labelKey: 'system.integumentary.title', progress: 88, status: 'mastered', achKeys: ['map.ach.integumentary.1'], recKey: 'map.rec.integumentary' }
-    };
+    // Data dynamically computed
+    let systemsData = {};
 
     const statusColors = {
         weak: 'var(--error, #ff3b30)',
@@ -25,6 +13,65 @@
     window.initKnowledgeMap = function () {
         const mapRoot = document.getElementById('knowledge-map-root');
         if (!mapRoot) return;
+
+        // --- DYNAMIC DATA GENERATION ---
+        const logs = window.DataCollector ? window.DataCollector.getLogs() : [];
+        const answerLogs = logs.filter(l => l.event_type === 'question_answered' && l.system_id !== 'general' && l.system_id);
+        
+        const breakdown = {};
+        answerLogs.forEach(log => {
+            let groupKey = log.system_id;
+            if (window.anatomyData) {
+                const element = window.anatomyData.find(e => e.id === log.system_id);
+                if (element && element.groupKey) {
+                    groupKey = element.groupKey;
+                }
+            }
+            if (!breakdown[groupKey]) {
+                breakdown[groupKey] = { correct: 0, total: 0 };
+            }
+            breakdown[groupKey].total += 1;
+            if (log.is_correct) breakdown[groupKey].correct += 1;
+        });
+
+        const targetGroups = ['nonmetal', 'noble_gas', 'alkali_metal', 'alkaline_earth', 'metalloid', 'halogen', 'post_transition', 'transition_metal', 'lanthanide'];
+        
+        systemsData = {};
+        let totalCorrect = 0;
+        let totalQuestions = 0;
+
+        targetGroups.forEach(gk => {
+            let correct = 0;
+            let total = 0;
+            if (breakdown[gk]) {
+                correct = breakdown[gk].correct;
+                total = breakdown[gk].total;
+                totalCorrect += correct;
+                totalQuestions += total;
+            }
+            let progress = total > 0 ? Math.round((correct / total) * 100) : 0;
+            let status = 'weak';
+            if (progress >= 80) status = 'mastered';
+            else if (progress >= 60) status = 'good';
+            else if (progress >= 40) status = 'developing';
+
+            systemsData[gk] = {
+                id: gk,
+                labelKey: `group.${gk}`,
+                progress: progress,
+                status: status,
+                achKeys: [], // Achievement logic can be expanded later
+                recKey: `map.rec.${gk}`
+            };
+        });
+
+        const overallProgress = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+        let overallStatus = 'weak';
+        if (overallProgress >= 80) overallStatus = 'mastered';
+        else if (overallProgress >= 60) overallStatus = 'good';
+        else if (overallProgress >= 40) overallStatus = 'developing';
+        
+        window.knowledgeMapOverall = { progress: overallProgress, status: overallStatus };
 
         // Clear previous
         mapRoot.innerHTML = '';
@@ -96,7 +143,8 @@
         const centerY = height / 2;
 
         // Central "Body" Node
-        createNode(root, { id: 'core', labelKey: 'hero.title', progress: 65, status: 'good' }, 50, 50, true);
+        const overall = window.knowledgeMapOverall || { progress: 0, status: 'weak' };
+        createNode(root, { id: 'core', labelKey: 'hero.title', progress: overall.progress, status: overall.status }, 50, 50, true);
 
         systemKeys.forEach((key, index) => {
             const data = systemsData[key];

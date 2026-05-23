@@ -6,6 +6,9 @@
 
         // Initialize Interactions
         setupInteractions(container);
+        
+        // Update the Adaptive Learning Preview Stats
+        updateStatsPreview();
 
         // Typing Effect removed for static list content
         // if (!window.syntaraInitialized) { ... }
@@ -281,6 +284,102 @@
 
         // Delay slightly for effect
         setTimeout(type, 500);
+    }
+
+    function updateStatsPreview() {
+        if (!window.DataCollector) return;
+        const logs = window.DataCollector.getLogs();
+        
+        const legacySystems = ['respiratory', 'digestive', 'cardiovascular', 'reproductive', 'nervous', 'muscular', 'integumentary', 'skeletal', 'immune', 'urinary', 'endocrine'];
+        const validLogs = logs.filter(l => !legacySystems.includes(l.system_id) && l.system_id !== 'general' && l.system_id);
+        const answerLogs = validLogs.filter(l => l.event_type === 'question_answered');
+        
+        const weakEl = document.getElementById('syntara-stat-weak');
+        const recEl = document.getElementById('syntara-stat-rec');
+        const accEl = document.getElementById('syntara-stat-acc');
+        const timeEl = document.getElementById('syntara-stat-time');
+        
+        if (answerLogs.length === 0) {
+            if(weakEl) weakEl.textContent = '0';
+            if(recEl) {
+                recEl.textContent = '-';
+                recEl.removeAttribute('data-i18n'); // prevent i18n from overriding
+            }
+            if(accEl) accEl.textContent = '0%';
+            if(timeEl) timeEl.textContent = '0m';
+            return;
+        }
+
+        const correct = answerLogs.filter(l => l.is_correct).length;
+        const totalTimeMs = answerLogs.reduce((acc, l) => acc + (l.response_time_ms || 0), 0);
+        const overallAccuracy = Math.round((correct / answerLogs.length) * 100);
+        
+        // System Breakdown by Group
+        const systemBreakdown = {};
+        answerLogs.forEach(log => {
+            let groupId = log.system_id;
+            if (window.anatomyData) {
+                const element = window.anatomyData.find(e => String(e.id) === String(log.system_id));
+                if (element && element.groupKey) {
+                    groupId = element.groupKey;
+                } else if (element && element.group) {
+                    groupId = element.group.toLowerCase().replace(/ /g, '_');
+                }
+            }
+
+            if (!systemBreakdown[groupId]) {
+                systemBreakdown[groupId] = { total: 0, correct: 0 };
+            }
+            systemBreakdown[groupId].total++;
+            if (log.is_correct) systemBreakdown[groupId].correct++;
+        });
+
+        let weakCount = 0;
+        let weakestSysId = null;
+        let weakestAcc = 100;
+
+        Object.keys(systemBreakdown).forEach(sysId => {
+            const stats = systemBreakdown[sysId];
+            const acc = (stats.correct / stats.total) * 100;
+            if (stats.total >= 2) {
+                if (acc < 70) weakCount++;
+                if (acc <= weakestAcc) {
+                    weakestAcc = acc;
+                    weakestSysId = sysId;
+                }
+            } else if (weakestSysId === null) {
+                if (acc < 70) weakCount++;
+                weakestSysId = sysId;
+                weakestAcc = acc;
+            }
+        });
+
+        let recName = '-';
+        if (weakestSysId) {
+            if (window.i18n && window.i18n.t(`group.${weakestSysId}`) !== `group.${weakestSysId}`) {
+                recName = window.i18n.t(`group.${weakestSysId}`);
+            } else if (window.anatomyData) {
+                const element = window.anatomyData.find(e => e.id === weakestSysId || e.groupKey === weakestSysId);
+                if (element && element.group) recName = element.group;
+                else recName = weakestSysId;
+            } else {
+                recName = weakestSysId;
+            }
+            
+        } else {
+             recName = 'Explore';
+        }
+
+        if(weakEl) weakEl.textContent = weakCount;
+        if(recEl) {
+            recEl.textContent = recName;
+            recEl.removeAttribute('data-i18n'); // dynamic content
+        }
+        if(accEl) accEl.textContent = `${overallAccuracy}%`;
+        if(timeEl) {
+            const totalMins = Math.round(totalTimeMs / 1000 / 60);
+            timeEl.textContent = `${totalMins}m`;
+        }
     }
 
     // Re-init on navigation

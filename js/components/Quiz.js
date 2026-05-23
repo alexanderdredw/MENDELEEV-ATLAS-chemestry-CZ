@@ -55,7 +55,9 @@
         const WINDOW_SIZE = 5;
 
         // Generate question ORDER only (not full question data)
-        const allIds = window.anatomyData.map(s => s.id);
+        const allIds = window.anatomyData
+            .filter(s => s.groupKey !== 'scientist')
+            .map(s => s.id);
         const questionQueue = shuffleArray([...allIds]).slice(0, 10); // 10 Questions total
 
         // Start Logging
@@ -111,8 +113,8 @@
 
         function renderQuestion() {
             if (currentQuestionIndex >= questionQueue.length) {
-                delete container.refreshQuiz;
                 window.DataCollector.logEvent('quiz_end', { final_score: score, total_questions: questionQueue.length });
+                container.refreshQuiz = () => renderResults(container, score, questionQueue.length, incorrectSystemIds);
                 renderResults(container, score, questionQueue.length, incorrectSystemIds);
                 return;
             }
@@ -139,6 +141,27 @@
             const rawSystem = window.anatomyData.find(s => s.id === systemId);
             if (qData.useFact && rawSystem.factKey) {
                 questionText = t(rawSystem.factKey);
+            }
+
+            // Mask the answer (title and symbol) from the question text
+            if (system.title) {
+                const escapedTitle = system.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const titleRegex = new RegExp(`(^|[^a-zA-Zа-яА-ЯёЁ0-9])(${escapedTitle})([^a-zA-Zа-яА-ЯёЁ0-9]|$)`, 'gi');
+                questionText = questionText.replace(titleRegex, '$1___$3');
+            }
+            if (rawSystem && rawSystem.symbol) {
+                const escapedSymbol = rawSystem.symbol.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const symbolRegex = new RegExp(`(^|[^a-zA-Zа-яА-ЯёЁ0-9])(${escapedSymbol})([^a-zA-Zа-яА-ЯёЁ0-9]|$)`, 'g'); // Case-sensitive for symbols like N, O
+                questionText = questionText.replace(symbolRegex, '$1___$3');
+            }
+
+            // Clean up boilerplate intros
+            questionText = questionText.replace(/^___\s*[-—–]?\s*(is|это)?\s*(element|элемент)\s*(#|№)?\s*\d+,?\s*(a\s+|an\s+)?/i, '');
+            questionText = questionText.replace(/^___\s*[-—–]?\s*(is|это)?\s*(a\s+|an\s+)?/i, '');
+            
+            // Capitalize first letter
+            if (questionText.length > 0) {
+                questionText = questionText.charAt(0).toUpperCase() + questionText.slice(1);
             }
 
             if (questionText.endsWith('.')) questionText = questionText.slice(0, -1);

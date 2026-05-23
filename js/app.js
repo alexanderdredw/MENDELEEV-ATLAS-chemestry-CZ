@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isActive = burgerBtn.classList.toggle('active');
             mainNav.classList.toggle('active');
             burgerBtn.setAttribute('aria-expanded', isActive);
+            document.body.classList.toggle('menu-open', isActive);
         });
 
         document.addEventListener('click', (e) => {
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 burgerBtn.classList.remove('active');
                 mainNav.classList.remove('active');
                 burgerBtn.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open');
             }
         });
     }
@@ -84,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 burgerBtn.classList.remove('active');
                 mainNav.classList.remove('active');
                 burgerBtn.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open');
             }
         });
     });
@@ -181,30 +184,90 @@ document.addEventListener('DOMContentLoaded', () => {
             sectionWrapper.className = 'glossary-section-wrapper';
             sectionWrapper.id = sectionId;
 
-            /* 
             const sectionTitle = document.createElement('h3');
             sectionTitle.className = 'glossary-section-title';
             sectionTitle.setAttribute('data-i18n', section.titleKey);
             sectionTitle.textContent = getTranslation(section.titleKey);
             sectionWrapper.appendChild(sectionTitle);
-            */
 
             const dl = document.createElement('dl');
             dl.className = 'glossary-list';
             section.terms.forEach(item => {
+                // Wrap each term-def pair in a div for highlighting
+                const termWrapper = document.createElement('div');
+                termWrapper.className = 'glossary-term-pair';
+                termWrapper.id = `gterm-${item.termKey.replace(/\./g, '-')}`;
+
                 const dt = document.createElement('dt');
                 dt.setAttribute('data-i18n', item.termKey);
                 dt.textContent = getTranslation(item.termKey);
                 const dd = document.createElement('dd');
                 dd.setAttribute('data-i18n', item.defKey);
                 dd.textContent = getTranslation(item.defKey);
-                dl.appendChild(dt);
-                dl.appendChild(dd);
+                termWrapper.appendChild(dt);
+                termWrapper.appendChild(dd);
+                dl.appendChild(termWrapper);
             });
             sectionWrapper.appendChild(dl);
             glossaryContainer.appendChild(sectionWrapper);
         });
     }
+
+    /**
+     * Navigate to glossary and scroll to + highlight a specific term.
+     * Called from Search when user clicks a glossary result.
+     * @param {string} termKey - e.g. "glossary.term.21"
+     */
+    window.navigateToGlossaryTerm = function (termKey) {
+        // 1. Navigate to glossary view
+        window.navigate('glossary');
+
+        // 2. Build the element ID from the termKey
+        const targetId = `gterm-${termKey.replace(/\./g, '-')}`;
+
+        // 3. Scroll to top first to reset viewport
+        window.scrollTo({ top: 0, behavior: 'instant' });
+
+        // 4. Wait for the view to fully render and paint, then scroll to term
+        function attemptScroll(retries) {
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) {
+                if (retries > 0) {
+                    setTimeout(() => attemptScroll(retries - 1), 200);
+                }
+                return;
+            }
+
+            // Remove any previous highlights
+            document.querySelectorAll('.glossary-term-pair.search-spotlight').forEach(el => {
+                el.classList.remove('search-spotlight');
+            });
+
+            // Calculate position and scroll
+            requestAnimationFrame(() => {
+                const headerOffset = 110;
+                const rect = targetEl.getBoundingClientRect();
+                const absoluteTop = rect.top + window.pageYOffset;
+                window.scrollTo({
+                    top: absoluteTop - headerOffset,
+                    behavior: 'smooth'
+                });
+
+                // Add highlight class after scroll animation completes
+                setTimeout(() => {
+                    targetEl.classList.add('search-spotlight');
+
+                    // Auto-remove highlight after 5 seconds with fade-out
+                    setTimeout(() => {
+                        targetEl.classList.remove('search-spotlight');
+                    }, 5000);
+                }, 600);
+            });
+        }
+
+        // Start attempt after view transition completes
+        setTimeout(() => attemptScroll(5), 350);
+    };
 
     function getTranslation(key) {
         if (window.i18n && window.i18n.t) return window.i18n.t(key);
@@ -244,4 +307,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Glossary Scroll-to-Top Button Logic
+    const glossaryScrollBtn = document.getElementById('glossary-scroll-top-btn');
+    if (glossaryScrollBtn) {
+        const updateGlossaryScrollBtn = () => {
+            if (state.view !== 'glossary' || window.scrollY <= 300) {
+                glossaryScrollBtn.classList.remove('visible');
+            } else {
+                glossaryScrollBtn.classList.add('visible');
+            }
+        };
+
+        window.addEventListener('scroll', updateGlossaryScrollBtn);
+        window.addEventListener('navigate', updateGlossaryScrollBtn);
+
+        glossaryScrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });
