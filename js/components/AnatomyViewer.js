@@ -66,6 +66,15 @@
         if (system) window.openAnatomyDetail(system);
     });
 
+    window.addEventListener('setExploreFilter', (e) => {
+        const filter = e.detail.filter;
+        if (filter) {
+            activeFilter = filter;
+            if (viewerContainer) renderAll();
+        }
+    });
+
+
     function t(key, fallback) {
         return (window.i18n && window.i18n.t(key)) || fallback || key;
     }

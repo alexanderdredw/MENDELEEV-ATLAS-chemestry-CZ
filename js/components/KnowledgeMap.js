@@ -75,12 +75,17 @@
 
         // Clear previous
         mapRoot.innerHTML = '';
+        // Also remove any previous mobile panel from parent
+        const existingMobilePanel = mapRoot.parentElement ? mapRoot.parentElement.querySelector('.mobile-map-panel') : null;
+        if (existingMobilePanel) existingMobilePanel.remove();
 
         const width = window.innerWidth;
 
         // 1. Mobile (< 768px)
         if (width < 768) {
-            renderMobileFallback(mapRoot);
+            // Render into the parent .map-interface, not the hidden .map-canvas
+            const mapInterface = mapRoot.closest('.map-interface') || mapRoot.parentElement;
+            renderMobileFallback(mapInterface);
             return;
         }
 
@@ -100,17 +105,178 @@
     };
 
     function renderMobileFallback(root) {
+        const overall = window.knowledgeMapOverall || { progress: 0, status: 'weak' };
+        const t = (key, fallback) => (window.i18n && window.i18n.t ? window.i18n.t(key) : fallback || key);
+
+        // Calculate stats
+        const systemKeys = Object.keys(systemsData);
+        const totalSystems = systemKeys.length;
+        const masteredCount = systemKeys.filter(k => systemsData[k].status === 'mastered').length;
+        const activeCount = systemKeys.filter(k => systemsData[k].progress > 0 && systemsData[k].status !== 'mastered').length;
+        const weakCount = systemKeys.filter(k => systemsData[k].status === 'weak').length;
+
+        // Status color and label
+        const statusColor = statusColors[overall.status] || '#646cff';
+        const statusLabel = t(`map.${overall.status}`, overall.status).toUpperCase();
+
+        // SVG ring
+        const radius = 54;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (overall.progress / 100) * circumference;
+
+        // Group colors for system buttons
+        const groupColors = {
+            'nonmetal': '#22c55e',
+            'noble_gas': '#a855f7',
+            'alkali_metal': '#ef4444',
+            'alkaline_earth': '#f97316',
+            'metalloid': '#eab308',
+            'halogen': '#8b5cf6',
+            'post_transition': '#94a3b8',
+            'transition_metal': '#3b82f6',
+            'lanthanide': '#ec4899'
+        };
+
+        // Group icons for visual richness
+        const groupIcons = {
+            'nonmetal': '⚡',
+            'noble_gas': '💎',
+            'alkali_metal': '🔥',
+            'alkaline_earth': '🪨',
+            'metalloid': '⚗️',
+            'halogen': '🧪',
+            'post_transition': '🔩',
+            'transition_metal': '⚙️',
+            'lanthanide': '✨'
+        };
+
+        // Build system buttons HTML
+        let systemButtonsHTML = '';
+        systemKeys.forEach(key => {
+            const sys = systemsData[key];
+            const groupLabel = t(sys.labelKey, key);
+            const barColor = statusColors[sys.status] || '#fff';
+            const chipColor = groupColors[key] || '#666';
+            const icon = groupIcons[key] || '🔬';
+
+            systemButtonsHTML += `
+                <button class="mobile-system-btn" data-system-id="${key}" style="--sys-color: ${chipColor}; --sys-bar-color: ${barColor};">
+                    <div class="mobile-sys-icon">${icon}</div>
+                    <div class="mobile-sys-info">
+                        <span class="mobile-sys-name">${groupLabel}</span>
+                        <div class="mobile-sys-bar-track">
+                            <div class="mobile-sys-bar-fill" style="width: ${sys.progress}%; background: ${barColor};"></div>
+                        </div>
+                    </div>
+                    <span class="mobile-sys-pct" style="color: ${barColor};">${sys.progress}%</span>
+                    <svg class="mobile-sys-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>`;
+        });
+
         const card = document.createElement('div');
-        card.className = 'map-fallback-card mobile';
+        card.className = 'mobile-map-panel';
         card.innerHTML = `
-            <div class="fallback-content">
-                <div class="fallback-icon">📱</div>
-                <h3 data-i18n="map.mobile.title">AI Learning Insights</h3>
-                <p data-i18n="map.mobile.desc">Your detailed learning map is available on desktop devices for optimal visualization.</p>
-                <button class="btn btn-sm btn-primary" onclick="window.navigate('learn')" data-i18n="map.mobile.btn">Continue Learning</button>
+            <div class="mobile-map-panel-inner">
+                <!-- Header with ring -->
+                <div class="mobile-map-header">
+                    <div class="mobile-ring-wrap">
+                        <svg class="mobile-ring-svg" viewBox="0 0 120 120">
+                            <circle class="ring-bg" cx="60" cy="60" r="${radius}" />
+                            <circle class="ring-fill" cx="60" cy="60" r="${radius}"
+                                stroke="${statusColor}"
+                                stroke-dasharray="${circumference}"
+                                stroke-dashoffset="${offset}" />
+                        </svg>
+                        <div class="mobile-ring-text">
+                            <span class="mobile-ring-pct" style="color: ${statusColor};">${overall.progress}%</span>
+                        </div>
+                    </div>
+                    <div class="mobile-map-title-block">
+                        <h3>${t('hero.title', 'Architecture of Matter').replace(/<[^>]*>/g, ' ').replace(/\s*\./g, '').trim()}</h3>
+                        <div class="mobile-status-badge" style="color: ${statusColor}; border-color: ${statusColor};">${statusLabel}</div>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="mobile-stats-grid">
+                    <div class="mobile-stat-card">
+                        <div class="mobile-stat-num" style="color: var(--success, #34c759);">${masteredCount}</div>
+                        <div class="mobile-stat-lbl">${t('map.mastered', 'Excellent')}</div>
+                    </div>
+                    <div class="mobile-stat-card">
+                        <div class="mobile-stat-num" style="color: var(--info, #007aff);">${activeCount}</div>
+                        <div class="mobile-stat-lbl">${t('map.progress', 'Progress')}</div>
+                    </div>
+                    <div class="mobile-stat-card">
+                        <div class="mobile-stat-num" style="color: var(--error, #ff3b30);">${weakCount}</div>
+                        <div class="mobile-stat-lbl">${t('map.weak', 'Weak')}</div>
+                    </div>
+                </div>
+
+                <!-- System Performance Section -->
+                <div class="mobile-perf-section">
+                    <h4>${t('analytics.section.performance', 'System Performance')}</h4>
+                    <div class="mobile-system-list">
+                        ${systemButtonsHTML}
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <a class="mobile-map-action-btn" id="mobile-map-start-btn">
+                    ${t('hero.start', 'Get Started')} →
+                </a>
+
+                <!-- Back to Main Menu Button -->
+                <button class="mobile-map-back-btn" id="mobile-map-back-btn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    <span>${t('hero.title', 'Architecture of Matter').replace(/<[^>]*>/g, ' ').replace(/\s*\./g, '').trim()}</span>
+                </button>
             </div>
         `;
         root.appendChild(card);
+
+        // Animate ring
+        requestAnimationFrame(() => {
+            const ringFill = card.querySelector('.ring-fill');
+            if (ringFill) {
+                ringFill.style.transition = 'stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1)';
+                ringFill.style.strokeDashoffset = offset;
+            }
+        });
+
+        // Bind system buttons — navigate to Explore and select the system
+        card.querySelectorAll('.mobile-system-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const sysId = btn.dataset.systemId;
+                if (window.navigate) {
+                    window.navigate('explore');
+                }
+                setTimeout(() => {
+                    window.dispatchEvent(new CustomEvent('setExploreFilter', { detail: { filter: sysId } }));
+                }, 50);
+            });
+        });
+
+        // Bind start button
+        const startBtn = card.querySelector('#mobile-map-start-btn');
+        if (startBtn) {
+            startBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.navigate) window.navigate('explore');
+            });
+        }
+
+        // Bind back button — return to home
+        const backBtn = card.querySelector('#mobile-map-back-btn');
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                if (window.navigate) window.navigate('home');
+            });
+        }
     }
 
     function renderTabletFallback(root) {
@@ -144,7 +310,14 @@
 
         // Central "Body" Node
         const overall = window.knowledgeMapOverall || { progress: 0, status: 'weak' };
-        createNode(root, { id: 'core', labelKey: 'hero.title', progress: overall.progress, status: overall.status }, 50, 50, true);
+        const coreNode = createNode(root, { id: 'core', labelKey: 'hero.title', progress: overall.progress, status: overall.status }, 50, 50, true);
+
+        // Add click listener to core node for overall progress
+        coreNode.addEventListener('click', () => {
+            document.querySelectorAll('.map-node').forEach(n => n.classList.remove('active'));
+            coreNode.classList.add('active');
+            updateOverallPanel(overall, systemsData);
+        });
 
         systemKeys.forEach((key, index) => {
             const data = systemsData[key];
@@ -207,7 +380,12 @@
         if (data.labelKey) {
             label.setAttribute('data-i18n', data.labelKey);
             if (window.i18n && window.i18n.t) {
-                label.innerHTML = window.i18n.t(data.labelKey);
+                let text = window.i18n.t(data.labelKey);
+                // The hero.title translation includes a dot for the main page, but we don't want it in the map node
+                if (data.labelKey === 'hero.title') {
+                    text = text.replace(/\./g, '');
+                }
+                label.innerHTML = text;
             } else {
                 label.textContent = data.labelKey;
             }
@@ -236,6 +414,24 @@
         svg.appendChild(line);
     }
 
+    // Store original panel HTML so we can restore it after overall panel replaces it
+    const _originalPanelHTML = `
+        <h3 id="panel-title">System Name</h3>
+        <div class="panel-stat-row">
+            <span class="panel-stat-label" data-i18n="map.progress">Progress</span>
+            <span class="panel-stat-value" id="panel-progress">0%</span>
+        </div>
+        <div class="panel-status-badge" id="panel-status">Status</div>
+        <div class="panel-section">
+            <h4 data-i18n="map.achievements">Achievements</h4>
+            <ul id="panel-achievements" class="panel-list"></ul>
+        </div>
+        <div class="panel-section">
+            <h4 data-i18n="map.recommended">Recommended Action</h4>
+            <div id="panel-recommendation" class="recommendation-card"></div>
+        </div>
+    `;
+
     function updateSidePanel(data) {
         const panel = document.getElementById('map-details-panel');
         const content = panel.querySelector('.panel-content');
@@ -243,6 +439,11 @@
 
         placeholder.style.display = 'none';
         content.style.display = 'block';
+
+        // Restore standard panel structure if it was replaced by the overall panel
+        if (!document.getElementById('panel-title')) {
+            content.innerHTML = _originalPanelHTML;
+        }
 
         // Update Fields
         const titleEl = document.getElementById('panel-title');
@@ -323,11 +524,118 @@
                     window.navigate('explore');
                 }
 
-                // Dispatch event to open the specific system details
-                // Small delay to ensure view transition is handled
+                // Dispatch event to set the filter to the specific system group
                 setTimeout(() => {
-                    window.dispatchEvent(new CustomEvent('selectSystem', { detail: { systemId: data.id } }));
-                }, 100);
+                    window.dispatchEvent(new CustomEvent('setExploreFilter', { detail: { filter: data.id } }));
+                }, 50);
+            });
+        }
+    }
+
+    function updateOverallPanel(overall, systems) {
+        const panel = document.getElementById('map-details-panel');
+        const content = panel.querySelector('.panel-content');
+        const placeholder = panel.querySelector('.panel-placeholder');
+
+        placeholder.style.display = 'none';
+        content.style.display = 'block';
+
+        const t = (key, fallback) => (window.i18n && window.i18n.t ? window.i18n.t(key) : fallback || key);
+
+        // Calculate stats
+        const systemKeys = Object.keys(systems);
+        const totalSystems = systemKeys.length;
+        const masteredCount = systemKeys.filter(k => systems[k].status === 'mastered').length;
+        const weakCount = systemKeys.filter(k => systems[k].status === 'weak').length;
+        const activeCount = systemKeys.filter(k => systems[k].progress > 0).length;
+
+        // Status color
+        const statusColor = statusColors[overall.status] || '#646cff';
+        const statusLabel = t(`map.${overall.status}`, overall.status).toUpperCase();
+
+        // SVG circular progress ring
+        const radius = 54;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (overall.progress / 100) * circumference;
+
+        // Build per-group breakdown bars HTML
+        let breakdownHTML = '';
+        systemKeys.forEach(key => {
+            const sys = systems[key];
+            const groupLabel = t(sys.labelKey, key);
+            const barColor = statusColors[sys.status] || '#fff';
+            breakdownHTML += `
+                <div class="overall-breakdown-row">
+                    <span class="breakdown-label">${groupLabel}</span>
+                    <div class="breakdown-bar-track">
+                        <div class="breakdown-bar-fill" style="width: ${sys.progress}%; background: ${barColor};"></div>
+                    </div>
+                    <span class="breakdown-value" style="color: ${barColor};">${sys.progress}%</span>
+                </div>`;
+        });
+
+        content.innerHTML = `
+            <div class="overall-panel-header">
+                <div class="overall-ring-container">
+                    <svg class="overall-ring-svg" viewBox="0 0 120 120">
+                        <circle class="ring-bg" cx="60" cy="60" r="${radius}" />
+                        <circle class="ring-fill" cx="60" cy="60" r="${radius}"
+                            stroke="${statusColor}"
+                            stroke-dasharray="${circumference}"
+                            stroke-dashoffset="${offset}" />
+                    </svg>
+                    <div class="overall-ring-text">
+                        <span class="overall-ring-pct" style="color: ${statusColor};">${overall.progress}%</span>
+                    </div>
+                </div>
+                <div class="overall-title-block">
+                    <h3>${t('hero.title', 'Architecture of Matter').replace(/<[^>]*>/g, ' ').replace(/\s*\./g, '').trim()}</h3>
+                    <div class="overall-status-badge" style="color: ${statusColor}; border-color: ${statusColor};">${statusLabel}</div>
+                </div>
+            </div>
+
+            <div class="overall-stats-grid">
+                <div class="overall-stat-card">
+                    <div class="overall-stat-number" style="color: var(--success, #34c759);">${masteredCount}</div>
+                    <div class="overall-stat-label">${t('map.mastered', 'Mastered')}</div>
+                </div>
+                <div class="overall-stat-card">
+                    <div class="overall-stat-number" style="color: var(--info, #007aff);">${activeCount}</div>
+                    <div class="overall-stat-label">${t('map.progress', 'Active')}</div>
+                </div>
+                <div class="overall-stat-card">
+                    <div class="overall-stat-number" style="color: var(--error, #ff3b30);">${weakCount}</div>
+                    <div class="overall-stat-label">${t('map.weak', 'Weak')}</div>
+                </div>
+            </div>
+
+            <div class="overall-breakdown-section">
+                <h4>${t('analytics.section.performance', 'System Performance')}</h4>
+                <div class="overall-breakdown-list">
+                    ${breakdownHTML}
+                </div>
+            </div>
+
+            <a class="overall-action-btn" id="overall-explore-btn">
+                ${t('hero.start', 'Start Exploring')} →
+            </a>
+        `;
+
+        // Animate ring on next frame
+        requestAnimationFrame(() => {
+            const ringFill = content.querySelector('.ring-fill');
+            if (ringFill) {
+                ringFill.style.transition = 'stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1)';
+                ringFill.style.strokeDashoffset = offset;
+            }
+        });
+
+        // Explore button
+        const exploreBtn = document.getElementById('overall-explore-btn');
+        if (exploreBtn) {
+            exploreBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.navigate) window.navigate('explore');
             });
         }
     }

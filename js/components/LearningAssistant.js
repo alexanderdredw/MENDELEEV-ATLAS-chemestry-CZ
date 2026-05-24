@@ -146,9 +146,11 @@ class LearningAssistant {
         const qData = this.quizState.questions[this.quizState.currentIndex];
         const progress = `${this.quizState.currentIndex + 1} / ${this.quizState.questions.length}`;
 
-        const options = qData.options.map((opt, idx) => {
-            const text = this.t(opt);
-            return `<button class="ai-quiz-opt" data-index="${idx}">${text}</button>`;
+        let optionsArray = qData.options.map((opt, idx) => ({ text: this.t(opt), index: idx }));
+        optionsArray = this.shuffleArray(optionsArray);
+
+        const options = optionsArray.map(optObj => {
+            return `<button class="ai-quiz-opt" data-index="${optObj.index}">${optObj.text}</button>`;
         }).join('');
 
         return `
@@ -240,11 +242,11 @@ class LearningAssistant {
                 <div class="score-circle" style="font-size:2.5rem; font-weight:bold; color:var(--primary); margin:1rem 0;">
                     ${score}/${total}
                 </div>
-                <p style="color:var(--text-secondary);">${pct}% Correct</p>
+                <p style="color:var(--text-secondary);">${pct}% ${this.t('ai.quiz.correct_pct')}</p>
                 
                 ${recHtml}
 
-                <button class="ai-btn" id="restart-quiz" style="margin-top:1.5rem; width:100%; justify-content:center;">Try Again</button>
+                <button class="ai-btn" id="restart-quiz" style="margin-top:1.5rem; width:100%; justify-content:center;">${this.t('ai.quiz.try_again')}</button>
             </div>
         `;
     }
@@ -277,8 +279,11 @@ class LearningAssistant {
     // I will replace them with the new logic.
 
     renderQuiz(qData) { // Legacy wrapper
-        const options = qData.options.map((opt, idx) =>
-            `<button class="ai-quiz-opt" data-index="${idx}">${this.t(opt)}</button>`
+        let optionsArray = qData.options.map((opt, idx) => ({ text: this.t(opt), index: idx }));
+        optionsArray = this.shuffleArray(optionsArray);
+
+        const options = optionsArray.map(optObj =>
+            `<button class="ai-quiz-opt" data-index="${optObj.index}">${optObj.text}</button>`
         ).join('');
 
         return `

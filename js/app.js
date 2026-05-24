@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define Global Navigate Function First
     window.navigate = function (viewName) {
         state.view = viewName;
+        // Scroll to top when changing views
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         // Update Nav Buttons
         const navBtns = document.querySelectorAll('.nav-btn');
         navBtns.forEach(btn => {

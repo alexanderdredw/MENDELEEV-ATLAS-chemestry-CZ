@@ -1881,7 +1881,11 @@ window.anatomyData = [
             simpleKey: 'ai.mendeleev.simple',
             detailedKey: 'ai.mendeleev.detailed',
             studyKey: ['ai.mendeleev.study.1', 'ai.mendeleev.study.2', 'ai.mendeleev.study.3', 'ai.mendeleev.study.4', 'ai.mendeleev.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.mendeleev.q1.text', options: ['ai.mendeleev.q1.opt.1', 'ai.mendeleev.q1.opt.2', 'ai.mendeleev.q1.opt.3', 'ai.mendeleev.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.mendeleev.q2.text', options: ['ai.mendeleev.q2.opt.1', 'ai.mendeleev.q2.opt.2', 'ai.mendeleev.q2.opt.3', 'ai.mendeleev.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.mendeleev.q3.text', options: ['ai.mendeleev.q3.opt.1', 'ai.mendeleev.q3.opt.2', 'ai.mendeleev.q3.opt.3', 'ai.mendeleev.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -1905,7 +1909,11 @@ window.anatomyData = [
             simpleKey: 'ai.curie.simple',
             detailedKey: 'ai.curie.detailed',
             studyKey: ['ai.curie.study.1', 'ai.curie.study.2', 'ai.curie.study.3', 'ai.curie.study.4', 'ai.curie.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.curie.q1.text', options: ['ai.curie.q1.opt.1', 'ai.curie.q1.opt.2', 'ai.curie.q1.opt.3', 'ai.curie.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.curie.q2.text', options: ['ai.curie.q2.opt.1', 'ai.curie.q2.opt.2', 'ai.curie.q2.opt.3', 'ai.curie.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.curie.q3.text', options: ['ai.curie.q3.opt.1', 'ai.curie.q3.opt.2', 'ai.curie.q3.opt.3', 'ai.curie.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -1929,7 +1937,11 @@ window.anatomyData = [
             simpleKey: 'ai.lavoisier.simple',
             detailedKey: 'ai.lavoisier.detailed',
             studyKey: ['ai.lavoisier.study.1', 'ai.lavoisier.study.2', 'ai.lavoisier.study.3', 'ai.lavoisier.study.4', 'ai.lavoisier.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.lavoisier.q1.text', options: ['ai.lavoisier.q1.opt.1', 'ai.lavoisier.q1.opt.2', 'ai.lavoisier.q1.opt.3', 'ai.lavoisier.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.lavoisier.q2.text', options: ['ai.lavoisier.q2.opt.1', 'ai.lavoisier.q2.opt.2', 'ai.lavoisier.q2.opt.3', 'ai.lavoisier.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.lavoisier.q3.text', options: ['ai.lavoisier.q3.opt.1', 'ai.lavoisier.q3.opt.2', 'ai.lavoisier.q3.opt.3', 'ai.lavoisier.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -1953,7 +1965,11 @@ window.anatomyData = [
             simpleKey: 'ai.bohr.simple',
             detailedKey: 'ai.bohr.detailed',
             studyKey: ['ai.bohr.study.1', 'ai.bohr.study.2', 'ai.bohr.study.3', 'ai.bohr.study.4', 'ai.bohr.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.bohr.q1.text', options: ['ai.bohr.q1.opt.1', 'ai.bohr.q1.opt.2', 'ai.bohr.q1.opt.3', 'ai.bohr.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.bohr.q2.text', options: ['ai.bohr.q2.opt.1', 'ai.bohr.q2.opt.2', 'ai.bohr.q2.opt.3', 'ai.bohr.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.bohr.q3.text', options: ['ai.bohr.q3.opt.1', 'ai.bohr.q3.opt.2', 'ai.bohr.q3.opt.3', 'ai.bohr.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -1977,7 +1993,11 @@ window.anatomyData = [
             simpleKey: 'ai.rutherford.simple',
             detailedKey: 'ai.rutherford.detailed',
             studyKey: ['ai.rutherford.study.1', 'ai.rutherford.study.2', 'ai.rutherford.study.3', 'ai.rutherford.study.4', 'ai.rutherford.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.rutherford.q1.text', options: ['ai.rutherford.q1.opt.1', 'ai.rutherford.q1.opt.2', 'ai.rutherford.q1.opt.3', 'ai.rutherford.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.rutherford.q2.text', options: ['ai.rutherford.q2.opt.1', 'ai.rutherford.q2.opt.2', 'ai.rutherford.q2.opt.3', 'ai.rutherford.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.rutherford.q3.text', options: ['ai.rutherford.q3.opt.1', 'ai.rutherford.q3.opt.2', 'ai.rutherford.q3.opt.3', 'ai.rutherford.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -2001,7 +2021,11 @@ window.anatomyData = [
             simpleKey: 'ai.dalton.simple',
             detailedKey: 'ai.dalton.detailed',
             studyKey: ['ai.dalton.study.1', 'ai.dalton.study.2', 'ai.dalton.study.3', 'ai.dalton.study.4', 'ai.dalton.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.dalton.q1.text', options: ['ai.dalton.q1.opt.1', 'ai.dalton.q1.opt.2', 'ai.dalton.q1.opt.3', 'ai.dalton.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.dalton.q2.text', options: ['ai.dalton.q2.opt.1', 'ai.dalton.q2.opt.2', 'ai.dalton.q2.opt.3', 'ai.dalton.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.dalton.q3.text', options: ['ai.dalton.q3.opt.1', 'ai.dalton.q3.opt.2', 'ai.dalton.q3.opt.3', 'ai.dalton.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -2025,7 +2049,11 @@ window.anatomyData = [
             simpleKey: 'ai.pauling.simple',
             detailedKey: 'ai.pauling.detailed',
             studyKey: ['ai.pauling.study.1', 'ai.pauling.study.2', 'ai.pauling.study.3', 'ai.pauling.study.4', 'ai.pauling.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.pauling.q1.text', options: ['ai.pauling.q1.opt.1', 'ai.pauling.q1.opt.2', 'ai.pauling.q1.opt.3', 'ai.pauling.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.pauling.q2.text', options: ['ai.pauling.q2.opt.1', 'ai.pauling.q2.opt.2', 'ai.pauling.q2.opt.3', 'ai.pauling.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.pauling.q3.text', options: ['ai.pauling.q3.opt.1', 'ai.pauling.q3.opt.2', 'ai.pauling.q3.opt.3', 'ai.pauling.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -2049,7 +2077,11 @@ window.anatomyData = [
             simpleKey: 'ai.nobel.simple',
             detailedKey: 'ai.nobel.detailed',
             studyKey: ['ai.nobel.study.1', 'ai.nobel.study.2', 'ai.nobel.study.3', 'ai.nobel.study.4', 'ai.nobel.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.nobel.q1.text', options: ['ai.nobel.q1.opt.1', 'ai.nobel.q1.opt.2', 'ai.nobel.q1.opt.3', 'ai.nobel.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.nobel.q2.text', options: ['ai.nobel.q2.opt.1', 'ai.nobel.q2.opt.2', 'ai.nobel.q2.opt.3', 'ai.nobel.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.nobel.q3.text', options: ['ai.nobel.q3.opt.1', 'ai.nobel.q3.opt.2', 'ai.nobel.q3.opt.3', 'ai.nobel.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     },
     {
@@ -2073,7 +2105,11 @@ window.anatomyData = [
             simpleKey: 'ai.hodgkin.simple',
             detailedKey: 'ai.hodgkin.detailed',
             studyKey: ['ai.hodgkin.study.1', 'ai.hodgkin.study.2', 'ai.hodgkin.study.3', 'ai.hodgkin.study.4', 'ai.hodgkin.study.5'],
-            questions: []
+            questions: [
+                { textKey: 'ai.hodgkin.q1.text', options: ['ai.hodgkin.q1.opt.1', 'ai.hodgkin.q1.opt.2', 'ai.hodgkin.q1.opt.3', 'ai.hodgkin.q1.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.hodgkin.q2.text', options: ['ai.hodgkin.q2.opt.1', 'ai.hodgkin.q2.opt.2', 'ai.hodgkin.q2.opt.3', 'ai.hodgkin.q2.opt.4'], correctIndex: 0, topic: 'biography' },
+                { textKey: 'ai.hodgkin.q3.text', options: ['ai.hodgkin.q3.opt.1', 'ai.hodgkin.q3.opt.2', 'ai.hodgkin.q3.opt.3', 'ai.hodgkin.q3.opt.4'], correctIndex: 0, topic: 'biography' }
+            ]
         }
     }
 ];

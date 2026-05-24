@@ -13,6 +13,8 @@
             const isIntro = container.querySelector('.quiz-intro');
             if (isIntro) {
                 renderQuizIntro(container);
+            } else if (container.refreshResults) {
+                container.refreshResults();
             } else if (container.refreshQuiz) {
                 container.refreshQuiz();
             }
@@ -77,6 +79,10 @@
                 return;
             }
 
+            container.refreshQuiz = () => {
+                renderQuestion(true); // pass true if we want to avoid resetting timer, but just re-render is fine
+            };
+
             questionStartTime = Date.now();
             const currentScientist = questionQueue[currentQuestionIndex];
             const levelConfig = getLevelConfig(currentLevel);
@@ -116,7 +122,7 @@
                         <p class="quiz-question-desc" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary);">${questionText}</p>
                     </div>
 
-                    <div class="quiz-options" style="display: grid; gap: 1rem; grid-template-columns: 1fr 1fr;">
+                    <div class="quiz-options">
                         ${options.map(opt => `
                             <button class="btn btn-secondary quiz-opt" data-id="${opt.id}" style="padding: 15px; font-size: 1.05rem;">
                                 ${t(opt.titleKey, opt.id)}
@@ -182,6 +188,9 @@
     }
 
     function renderResults(container, score, total, incorrectIds = []) {
+        container.refreshResults = () => renderResults(container, score, total, incorrectIds);
+        delete container.refreshQuiz;
+        
         const t = (key, fallback, params) => {
             if (!window.i18n) return fallback || key;
             const res = window.i18n.t(key, params);

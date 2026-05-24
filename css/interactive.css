@@ -826,7 +826,7 @@ body.theme-light .glossary-result-card:hover {
 }
 
 /* Mobile Quiz Layout */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .quiz-card {
         padding: 30px 20px;
         /* Reduced padding */

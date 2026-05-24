@@ -87,8 +87,9 @@
 }
 
 .ai-actions {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     position: relative;
 }
@@ -103,6 +104,8 @@
     font-size: 0.9rem;
     transition: all 0.2s ease;
     text-align: center;
+    flex: 1 1 120px;
+    max-width: 220px;
 }
 
 .ai-btn:hover {
