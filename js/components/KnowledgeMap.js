@@ -14,6 +14,12 @@
         const mapRoot = document.getElementById('knowledge-map-root');
         if (!mapRoot) return;
 
+        let activeNodeId = null;
+        const currentActive = mapRoot.querySelector('.map-node.active');
+        if (currentActive) {
+            activeNodeId = currentActive.dataset.id;
+        }
+
         // --- DYNAMIC DATA GENERATION ---
         const logs = window.DataCollector ? window.DataCollector.getLogs() : [];
         const answerLogs = logs.filter(l => l.event_type === 'question_answered' && l.system_id !== 'general' && l.system_id);
@@ -102,6 +108,14 @@
         mapRoot.appendChild(svgLayer);
 
         renderNodes(mapRoot, svgLayer);
+
+        // Restore active node to re-trigger panel translation
+        if (activeNodeId) {
+            const nodeToActivate = mapRoot.querySelector(`.map-node[data-id="${activeNodeId}"]`);
+            if (nodeToActivate) {
+                nodeToActivate.click();
+            }
+        }
     };
 
     function renderMobileFallback(root) {
@@ -120,7 +134,7 @@
         const statusLabel = t(`map.${overall.status}`, overall.status).toUpperCase();
 
         // SVG ring
-        const radius = 54;
+        const radius = 46;
         const circumference = 2 * Math.PI * radius;
         const offset = circumference - (overall.progress / 100) * circumference;
 
@@ -367,6 +381,8 @@
         const node = document.createElement('div');
         node.classList.add('map-node', data.status);
         if (isCore) node.classList.add('core-node');
+        
+        node.dataset.id = data.id || (isCore ? 'core' : 'unknown');
 
         // Position
         node.style.left = `${x}%`;
@@ -554,7 +570,7 @@
         const statusLabel = t(`map.${overall.status}`, overall.status).toUpperCase();
 
         // SVG circular progress ring
-        const radius = 54;
+        const radius = 46;
         const circumference = 2 * Math.PI * radius;
         const offset = circumference - (overall.progress / 100) * circumference;
 

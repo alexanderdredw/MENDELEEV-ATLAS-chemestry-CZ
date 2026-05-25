@@ -241,18 +241,6 @@ body.theme-light .theme-toggle .icon-sun {
     color: var(--text-primary);
     margin-top: var(--spacing-lg);
     font-size: 1.15rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.glossary-list dt::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text-secondary);
 }
 
 .glossary-list dd {
@@ -303,11 +291,6 @@ body.theme-light .theme-toggle .icon-sun {
 .glossary-term-pair.search-spotlight dt {
     color: #60a5fa !important;
     text-shadow: 0 0 20px rgba(56, 132, 255, 0.3);
-}
-
-.glossary-term-pair.search-spotlight dt::before {
-    background: #3884ff !important;
-    box-shadow: 0 0 10px rgba(56, 132, 255, 0.8);
 }
 
 .glossary-term-pair.search-spotlight dd {
@@ -656,7 +639,7 @@ body.theme-light .burger-menu:hover {
     }
 
     .hero-title {
-        font-size: clamp(28px, 8vw, 36px);
+        font-size: clamp(38px, 12vw, 48px);
         font-weight: 800;
         /* Bold and dominant */
         line-height: 1.1;
@@ -702,7 +685,7 @@ body.theme-light .burger-menu:hover {
 /* Ultra-small screen override for 320px */
 @media (max-width: 360px) {
     .hero-title {
-        font-size: 26px !important;
+        font-size: 38px !important;
         /* Stable scaling for small devices */
         line-height: 1.1 !important;
         letter-spacing: -0.01em !important;
