@@ -542,15 +542,50 @@
 }
 
 .mobile-sys-icon {
-    font-size: 1.3rem;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     flex-shrink: 0;
+    color: var(--sys-color, rgba(255, 255, 255, 0.7));
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-sys-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at center, var(--sys-color, transparent), transparent 70%);
+    opacity: 0.12;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-system-btn:hover .mobile-sys-icon,
+.mobile-system-btn:active .mobile-sys-icon {
+    border-color: var(--sys-color, rgba(255, 255, 255, 0.2));
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.3),
+        0 0 16px color-mix(in srgb, var(--sys-color, transparent) 20%, transparent),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.mobile-system-btn:hover .mobile-sys-icon::before,
+.mobile-system-btn:active .mobile-sys-icon::before {
+    opacity: 0.22;
+}
+
+.mobile-sys-icon svg {
+    display: block;
 }
 
 .mobile-sys-info {
@@ -699,9 +734,13 @@
     }
 
     .mobile-sys-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 1.1rem;
+        width: 34px;
+        height: 34px;
+    }
+
+    .mobile-sys-icon svg {
+        width: 16px;
+        height: 16px;
     }
 
     .mobile-sys-name {

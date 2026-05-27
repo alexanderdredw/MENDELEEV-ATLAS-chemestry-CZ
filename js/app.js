@@ -295,15 +295,97 @@ document.addEventListener('DOMContentLoaded', () => {
     if (factElement) renderFact();
     if (window.i18n && window.i18n.updateDOM) window.i18n.updateDOM();
 
-    // Dual-Profile Toggle Logic
+    // Dual-Profile Toggle Logic — smooth height-measured animation
     const profileToggles = document.querySelectorAll('.profile-toggle-btn');
+
+    // Pre-calculate collapsed preview heights (3 lines worth)
+    profileToggles.forEach(btn => {
+        const card = btn.closest('.profile-card');
+        const preview = card.querySelector('.profile-preview');
+        if (preview) {
+            // Compute 3-line height: line-height * 3
+            const lineHeight = parseFloat(getComputedStyle(preview).lineHeight);
+            const collapsedHeight = Math.ceil(lineHeight * 3);
+            preview.dataset.collapsedHeight = collapsedHeight;
+            preview.style.maxHeight = collapsedHeight + 'px';
+        }
+    });
+
     profileToggles.forEach(btn => {
         btn.addEventListener('click', () => {
             const card = btn.closest('.profile-card');
-            const isExpanded = card.classList.toggle('expanded');
+            const expandedPanel = card.querySelector('.profile-expanded');
+            const preview = card.querySelector('.profile-preview');
             const btnText = btn.querySelector('.btn-text');
+            const isCurrentlyExpanded = card.classList.contains('expanded');
+
+            // Guard: if animation is in progress, ignore click
+            if (expandedPanel.dataset.animating === 'true') return;
+            expandedPanel.dataset.animating = 'true';
+
+            if (!isCurrentlyExpanded) {
+                // EXPAND
+                card.classList.add('expanded');
+
+                // Animate preview text to full height
+                if (preview) {
+                    preview.style.transition = 'none';
+                    preview.style.maxHeight = 'none';
+                    const fullPreviewHeight = preview.scrollHeight;
+                    preview.style.maxHeight = preview.dataset.collapsedHeight + 'px';
+                    preview.offsetHeight;
+                    preview.style.transition = '';
+                    preview.style.maxHeight = fullPreviewHeight + 'px';
+                }
+
+                // Animate expanded panel
+                expandedPanel.style.transition = 'none';
+                expandedPanel.style.maxHeight = 'none';
+                const fullHeight = expandedPanel.scrollHeight;
+                expandedPanel.style.maxHeight = '0px';
+                expandedPanel.offsetHeight;
+                expandedPanel.style.transition = '';
+                expandedPanel.style.maxHeight = fullHeight + 'px';
+
+                expandedPanel.addEventListener('transitionend', function handler(e) {
+                    if (e.propertyName !== 'max-height') return;
+                    expandedPanel.style.maxHeight = 'none';
+                    if (preview) preview.style.maxHeight = 'none';
+                    expandedPanel.dataset.animating = 'false';
+                    expandedPanel.removeEventListener('transitionend', handler);
+                });
+            } else {
+                // COLLAPSE
+
+                // Animate preview text back to 3 lines
+                if (preview) {
+                    const fullPreviewHeight = preview.scrollHeight;
+                    preview.style.transition = 'none';
+                    preview.style.maxHeight = fullPreviewHeight + 'px';
+                    preview.offsetHeight;
+                    preview.style.transition = '';
+                    preview.style.maxHeight = preview.dataset.collapsedHeight + 'px';
+                }
+
+                // Animate expanded panel to 0
+                const fullHeight = expandedPanel.scrollHeight;
+                expandedPanel.style.transition = 'none';
+                expandedPanel.style.maxHeight = fullHeight + 'px';
+                expandedPanel.offsetHeight;
+                expandedPanel.style.transition = '';
+                card.classList.remove('expanded');
+                expandedPanel.style.maxHeight = '0px';
+
+                expandedPanel.addEventListener('transitionend', function handler(e) {
+                    if (e.propertyName !== 'max-height') return;
+                    expandedPanel.style.maxHeight = '';
+                    expandedPanel.dataset.animating = 'false';
+                    expandedPanel.removeEventListener('transitionend', handler);
+                });
+            }
+
             if (btnText && window.i18n && window.i18n.t) {
-                const key = isExpanded ? 'about.profiles.btn.show_less' : 'about.profiles.btn.show_more';
+                const key = isCurrentlyExpanded ? 'about.profiles.btn.show_more' : 'about.profiles.btn.show_less';
                 btnText.textContent = window.i18n.t(key);
                 btnText.setAttribute('data-i18n', key);
             }
