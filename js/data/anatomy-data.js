@@ -1875,7 +1875,7 @@ window.anatomyData = [
         color: '#FDE047',
         layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
         resources: [
-            { text: 'Wikipedia: Mendeleev', textKey: 'resource.wiki.mendeleev', url: 'https://ru.wikipedia.org/wiki/Менделеев,_Дмитрий_Иванович' }
+            { text: 'Wikipedia: Mendeleev', textKey: 'resource.wiki.mendeleev', url: 'https://en.wikipedia.org/wiki/Dmitri_Mendeleev' }
         ],
         ai: {
             simpleKey: 'ai.mendeleev.simple',
@@ -1903,7 +1903,7 @@ window.anatomyData = [
         color: '#FDE047',
         layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
         resources: [
-            { text: 'Wikipedia: Marie Curie', textKey: 'resource.wiki.curie', url: 'https://ru.wikipedia.org/wiki/Кюри,_Мария' }
+            { text: 'Wikipedia: Marie Curie', textKey: 'resource.wiki.curie', url: 'https://en.wikipedia.org/wiki/Marie_Curie' }
         ],
         ai: {
             simpleKey: 'ai.curie.simple',
@@ -1931,7 +1931,7 @@ window.anatomyData = [
         color: '#FDE047',
         layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
         resources: [
-            { text: 'Wikipedia: Lavoisier', textKey: 'resource.wiki.lavoisier', url: 'https://ru.wikipedia.org/wiki/Лавуазье,_Антуан_Лоран' }
+            { text: 'Wikipedia: Lavoisier', textKey: 'resource.wiki.lavoisier', url: 'https://en.wikipedia.org/wiki/Antoine_Lavoisier' }
         ],
         ai: {
             simpleKey: 'ai.lavoisier.simple',
@@ -1959,7 +1959,7 @@ window.anatomyData = [
         color: '#FDE047',
         layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
         resources: [
-            { text: 'Wikipedia: Bohr', textKey: 'resource.wiki.bohr', url: 'https://ru.wikipedia.org/wiki/Бор,_Нильс' }
+            { text: 'Wikipedia: Bohr', textKey: 'resource.wiki.bohr', url: 'https://en.wikipedia.org/wiki/Niels_Bohr' }
         ],
         ai: {
             simpleKey: 'ai.bohr.simple',
@@ -1987,7 +1987,7 @@ window.anatomyData = [
         color: '#FDE047',
         layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
         resources: [
-            { text: 'Wikipedia: Rutherford', textKey: 'resource.wiki.rutherford', url: 'https://ru.wikipedia.org/wiki/Резерфорд,_Эрнест' }
+            { text: 'Wikipedia: Rutherford', textKey: 'resource.wiki.rutherford', url: 'https://en.wikipedia.org/wiki/Ernest_Rutherford' }
         ],
         ai: {
             simpleKey: 'ai.rutherford.simple',
@@ -2015,7 +2015,7 @@ window.anatomyData = [
         color: '#FDE047',
         layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
         resources: [
-            { text: 'Wikipedia: Dalton', textKey: 'resource.wiki.dalton', url: 'https://ru.wikipedia.org/wiki/Дальтон,_Джон' }
+            { text: 'Wikipedia: Dalton', textKey: 'resource.wiki.dalton', url: 'https://en.wikipedia.org/wiki/John_Dalton' }
         ],
         ai: {
             simpleKey: 'ai.dalton.simple',
@@ -2043,7 +2043,7 @@ window.anatomyData = [
         color: '#FDE047',
         layers: ['biography', 'discovery', 'impact', 'ai_bridge'],
         resources: [
-            { text: 'Wikipedia: Pauling', textKey: 'resource.wiki.pauling', url: 'https://ru.wikipedia.org/wiki/Полинг,_Лайнус' }
+            { text: 'Wikipedia: Pauling', textKey: 'resource.wiki.pauling', url: 'https://en.wikipedia.org/wiki/Linus_Pauling' }
         ],
         ai: {
             simpleKey: 'ai.pauling.simple',

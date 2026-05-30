@@ -327,9 +327,9 @@
         }
 
         container.innerHTML = `
-            <div class="quiz-results fade-in-up" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                <h2 class="hero-title">${title}</h2>
-                <p class="hero-subtitle">${message}</p>
+            <div class="quiz-results fade-in-up" style="display: flex; flex-direction: column; align-items: center; width: 100%; text-align: center;">
+                <h2 class="hero-title" style="text-align: center;">${title}</h2>
+                <p class="hero-subtitle" style="text-align: center;">${message}</p>
                 <div class="score-circle" style="
                     width: 120px; 
                     height: 120px; 

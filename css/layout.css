@@ -697,3 +697,10 @@ body.theme-light .burger-menu:hover {
         padding-right: 8px !important;
     }
 }
+/* Mobile Adaptation for Analytics Header */
+@media (max-width: 768px) {
+    .analytics-header {
+        text-align: center;
+        width: 100%;
+    }
+}

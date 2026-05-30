@@ -4,7 +4,7 @@
     console.log('[Anatomy] Native Translation script loaded');
 
     let currentLang = 'en';
-    const supportedLangs = ['en', 'ru', 'kk'];
+    const supportedLangs = ['en', 'cs'];
 
     // Cache for loaded translation data
     const translations = {};
@@ -49,7 +49,7 @@
         if (!translations[lang]) {
             try {
                 // Add timestamp to prevent caching of old JSON files
-                const fileVersion = lang === 'kk' ? 'v3' : 'v2';
+                const fileVersion = 'v2';
                 const response = await fetch(`locales/${lang}_${fileVersion}.json?v=${new Date().getTime()}`);
                 if (!response.ok) throw new Error(`Failed to load ${lang}`);
                 translations[lang] = await response.json();
@@ -69,7 +69,7 @@
         document.documentElement.lang = lang;
 
         // Update body classes for styling hooks if needed
-        document.documentElement.classList.remove('lang-en', 'lang-ru', 'lang-kk');
+        document.documentElement.classList.remove('lang-en');
         document.documentElement.classList.add(`lang-${lang}`);
 
         // Trigger custom event for components to re-render
@@ -141,13 +141,10 @@
         document.body.appendChild(btn);
 
         btn.addEventListener('click', () => {
-            // Cycle: en -> ru -> kk -> en
-            const nextMap = {
-                'en': 'ru',
-                'ru': 'kk',
-                'kk': 'en'
-            };
-            const target = nextMap[currentLang] || 'en';
+            // Cycle through dynamically based on supportedLangs array
+            const currentIndex = supportedLangs.indexOf(currentLang);
+            const nextIndex = (currentIndex + 1) % supportedLangs.length;
+            const target = supportedLangs[nextIndex];
             setLanguage(target);
         });
     }
@@ -158,23 +155,27 @@
 
         const textSpan = btn.querySelector('.lang-text');
 
-        // Label mapping requested by user: EN -> RU -> KZ
+        // Label mapping
         const labels = {
             'en': 'EN',
-            'ru': 'RU',
-            'kk': 'KZ'
+            'cs': 'CZ'
         };
 
         const nextLangMap = {
-            'en': 'Russian',
-            'ru': 'Kazakh',
-            'kk': 'English'
+            'en': 'Czech',
+            'cs': 'English'
         };
 
-        textSpan.textContent = labels[lang] || 'EN';
+        textSpan.textContent = labels[lang] || lang.toUpperCase();
 
         // Update tooltip to show what comes next
-        btn.setAttribute('data-tooltip', `Switch to ${nextLangMap[lang]}`);
+        let nextLang = lang;
+        if (supportedLangs.length > 1) {
+            const currentIndex = supportedLangs.indexOf(lang);
+            const nextIndex = (currentIndex + 1) % supportedLangs.length;
+            nextLang = supportedLangs[nextIndex];
+        }
+        btn.setAttribute('data-tooltip', `Switch to ${nextLangMap[nextLang] || nextLang.toUpperCase()}`);
     }
 
     // Run
