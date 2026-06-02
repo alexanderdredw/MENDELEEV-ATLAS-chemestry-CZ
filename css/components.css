@@ -23,7 +23,7 @@
 }
 
 body.theme-light .btn-primary:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .btn-secondary {
@@ -34,7 +34,9 @@ body.theme-light .btn-primary:hover {
 }
 
 body.theme-light .btn-secondary {
-    background: rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .btn-secondary:hover {
@@ -42,7 +44,9 @@ body.theme-light .btn-secondary {
 }
 
 body.theme-light .btn-secondary:hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: #f0f0f4;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 6px 16px rgba(0, 0, 0, 0.04);
 }
 
 .glow-effect {
@@ -61,6 +65,10 @@ body.theme-light .btn-secondary:hover {
     opacity: 0;
     transform: scale(0.5);
     transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+body.theme-light .glow-effect::after {
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
 .glow-effect:hover::after {
@@ -95,6 +103,12 @@ body.theme-light .btn-secondary:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
+body.theme-light .glossary-scroll-top-btn {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
 .glossary-scroll-top-btn.visible {
     opacity: 1;
     pointer-events: auto;
@@ -106,6 +120,12 @@ body.theme-light .btn-secondary:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     border-color: rgba(255, 255, 255, 0.4);
+}
+
+body.theme-light .glossary-scroll-top-btn:hover {
+    background: #f0f0f4;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 .glossary-scroll-top-btn:active {

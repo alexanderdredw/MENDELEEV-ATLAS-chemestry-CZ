@@ -61,7 +61,7 @@
                 this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.size = Math.random() * 2 + 1;
-                this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`;
+                this.baseAlpha = Math.random() * 0.5 + 0.1;
             }
 
             update() {
@@ -74,7 +74,9 @@
             }
 
             draw() {
-                ctx.fillStyle = this.color;
+                const isLight = document.body.classList.contains('theme-light');
+                const rgb = isLight ? '0, 0, 0' : '255, 255, 255';
+                ctx.fillStyle = `rgba(${rgb}, ${this.baseAlpha})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -104,7 +106,9 @@
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
                     if (dist < connectionDistance) {
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - dist / connectionDistance * 0.2})`;
+                        const isLight = document.body.classList.contains('theme-light');
+                        const rgb = isLight ? '0, 0, 0' : '255, 255, 255';
+                        ctx.strokeStyle = `rgba(${rgb}, ${1 - dist / connectionDistance * 0.2})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);

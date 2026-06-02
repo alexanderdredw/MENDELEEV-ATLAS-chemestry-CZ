@@ -24,9 +24,9 @@
 }
 
 body.theme-light .anatomy-card {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .anatomy-card:hover {
@@ -36,8 +36,9 @@ body.theme-light .anatomy-card {
 }
 
 body.theme-light .anatomy-card:hover {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.06);
 }
 
 .card-visual {
@@ -56,6 +57,17 @@ body.theme-light .anatomy-card:hover {
 .visual-placeholder {
     width: 100%;
     height: 100%;
+}
+
+.anatomy-card-img {
+    opacity: 0.55;
+    mix-blend-mode: luminosity;
+    transition: opacity 0.4s ease, mix-blend-mode 0.4s ease;
+}
+
+body.theme-light .anatomy-card-img {
+    opacity: 0.95;
+    mix-blend-mode: normal;
 }
 
 .card-title {
@@ -181,7 +193,7 @@ body.theme-light .anatomy-card:hover {
 }
 
 body.theme-light .detail-overlay {
-    background: rgba(251, 251, 253, 0.95);
+    background: rgba(245, 245, 247, 0.96);
 }
 
 .close-btn {
@@ -227,6 +239,12 @@ body.theme-light .detail-overlay {
     border-radius: 20px;
 }
 
+body.theme-light .large-visual {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
 .detail-info h3 {
     margin-bottom: var(--spacing-md);
 }
@@ -258,7 +276,9 @@ body.theme-light .detail-overlay {
 }
 
 body.theme-light .tag {
-    background: rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 @keyframes fadeIn {

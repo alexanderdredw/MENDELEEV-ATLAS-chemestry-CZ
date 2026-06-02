@@ -661,9 +661,9 @@
         const isScientist = system.groupKey === 'scientist';
         const imageEl = system.image
             ? `<img src="${system.image}" alt="${t(system.titleKey, system.id)}"
+                class="anatomy-card-img"
                 style="position:absolute;top:0;left:0;width:100%;height:100%;
-                object-fit:cover;${isScientist ? 'object-position:center top;' : ''}
-                opacity:${isScientist ? '0.55' : '0.55'};mix-blend-mode:luminosity;transition:opacity 0.4s ease;">`
+                object-fit:cover;${isScientist ? 'object-position:center top;' : ''}">`
             : '';
 
         const atomicBadge = system.atomicNumber != null ? `
@@ -719,18 +719,28 @@
         const groupColor = system.groupKey ? (GROUP_COLORS[system.groupKey] || system.color) : system.color;
         const isDetailScientist = system.groupKey === 'scientist';
 
+        const displaySymbol = isDetailScientist 
+            ? (function() {
+                const name = t(system.titleKey, system.id);
+                const parts = name.trim().split(/\s+/);
+                if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+                return name.slice(0, 2).toUpperCase();
+            })()
+            : (system.symbol || '');
+
         const metaBadge = system.atomicNumber != null ? `
             <div style="
                 display:inline-flex;align-items:center;gap:12px;
-                background:${groupColor}12;border:1px solid ${groupColor}30;
+                background:${isDetailScientist ? 'var(--accent-gold-bg-strong)' : groupColor + '12'};
+                border:1px solid ${isDetailScientist ? 'var(--accent-gold-border)' : groupColor + '30'};
                 border-radius:12px;padding:8px 16px;margin-bottom:12px;
             ">
                 <div style="text-align:center;">
-                    <div style="font-size:2rem;font-weight:900;color:${groupColor};line-height:1;">${system.symbol || ''}</div>
+                    <div style="font-size:2rem;font-weight:900;color:${isDetailScientist ? 'var(--accent-gold-text)' : groupColor};line-height:1;">${displaySymbol}</div>
                     ${!isDetailScientist ? `<div style="font-size:0.7rem;color:var(--text-secondary);">${system.atomicNumber}</div>` : ''}
                 </div>
-                <div style="border-left:1px solid ${groupColor}30;padding-left:12px;">
-                    <div style="font-size:0.75rem;color:${groupColor};font-weight:600;">
+                <div style="border-left:1px solid ${isDetailScientist ? 'var(--accent-gold-border)' : groupColor + '30'};padding-left:12px;">
+                    <div style="font-size:0.75rem;color:${isDetailScientist ? 'var(--accent-gold-text)' : groupColor};font-weight:600;">
                         ${t(GROUP_LABELS_KEY[system.groupKey], system.group || '')}
                     </div>
                     ${!isDetailScientist ? `
@@ -769,9 +779,9 @@
                     <div class="detail-visual">
                         <div class="visual-stack" style="display:flex;flex-direction:column;gap:20px;width:100%;">
                             <div class="large-visual" style="
-                                border:2px solid ${system.color}20;position:relative;overflow:hidden;
+                                border:2px solid ${isDetailScientist ? 'var(--accent-gold-border)' : system.color + '20'};position:relative;overflow:hidden;
                                 display:flex;align-items:center;justify-content:center;
-                                background:radial-gradient(circle at center,${system.color}05 0%,transparent 70%);
+                                background:radial-gradient(circle at center,${isDetailScientist ? 'var(--accent-gold-bg-strong)' : system.color + '05'} 0%,transparent 70%);
                                 border-radius:16px;
                             ">
                                 ${system.image ? (system.groupKey === 'scientist'

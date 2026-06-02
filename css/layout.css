@@ -20,8 +20,9 @@
 }
 
 body.theme-light .main-header {
-    background: rgba(251, 251, 253, 0.8);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(245, 245, 247, 0.82);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
 /* Logo */
@@ -54,8 +55,8 @@ body.theme-light .main-header {
 }
 
 body.theme-light .main-nav {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .nav-btn {
@@ -100,7 +101,7 @@ body.theme-light .main-nav {
 }
 
 body.theme-light .theme-toggle:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 /* Icon Switching */
@@ -186,6 +187,12 @@ body.theme-light .theme-toggle .icon-sun {
     text-align: left;
 }
 
+body.theme-light .glossary-content {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
 .glossary-quick-nav {
     display: flex;
     flex-wrap: wrap;
@@ -193,6 +200,10 @@ body.theme-light .theme-toggle .icon-sun {
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-md);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.theme-light .glossary-quick-nav {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .glossary-nav-chip {
@@ -207,11 +218,23 @@ body.theme-light .theme-toggle .icon-sun {
     border: 1px solid transparent;
 }
 
+body.theme-light .glossary-nav-chip {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
 .glossary-nav-chip:hover {
     background: rgba(255, 255, 255, 0.2);
     color: var(--text-primary);
     transform: translateY(-2px);
     border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.theme-light .glossary-nav-chip:hover {
+    background: #f0f0f4;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .glossary-section-wrapper {
@@ -226,6 +249,10 @@ body.theme-light .theme-toggle .icon-sun {
     margin-bottom: var(--spacing-md);
     padding-bottom: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.theme-light .glossary-section-title {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .glossary-section-title:first-child {
@@ -250,6 +277,10 @@ body.theme-light .theme-toggle .icon-sun {
     line-height: 1.7;
     padding-bottom: var(--spacing-md);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.theme-light .glossary-list dd {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* Glossary term pair wrapper for deep-link highlighting */
@@ -378,6 +409,10 @@ body.theme-light .glossary-term-pair.search-spotlight dd {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+body.theme-light .main-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
 @keyframes rotate {
     from {
         transform: rotate(0deg);
@@ -409,8 +444,8 @@ body.menu-open {
 }
 
 body.theme-light .burger-menu {
-    color: #000000;
-    background: rgba(0, 0, 0, 0.05);
+    color: #1a1a1f;
+    background: rgba(0, 0, 0, 0.04);
     border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -419,7 +454,7 @@ body.theme-light .burger-menu {
 }
 
 body.theme-light .burger-menu:hover {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 .burger-icon {
@@ -534,8 +569,9 @@ body.theme-light .burger-menu:hover {
     }
 
     body.theme-light .main-nav {
-        background: rgba(255, 255, 255, 0.98);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        background: rgba(245, 245, 247, 0.98);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
 
     .main-nav.active {
@@ -553,7 +589,7 @@ body.theme-light .burger-menu:hover {
     }
 
     body.theme-light .nav-btn {
-        background: rgba(0, 0, 0, 0.05);
+        background: rgba(0, 0, 0, 0.04);
     }
 
     /* Burger Animation */

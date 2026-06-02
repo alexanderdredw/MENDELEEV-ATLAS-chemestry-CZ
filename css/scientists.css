@@ -8,8 +8,14 @@
     width: 100%;
     margin-bottom: 40px;
     background: rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.theme-light .timeline-viz {
+    background: #ffffff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 /* Hide scrollbar but allow scrolling for timeline */
@@ -24,7 +30,7 @@
 .scientist-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(253, 224, 71, 0.1);
-    border-color: rgba(253, 224, 71, 0.6) !important;
+    border-color: var(--accent-gold-border) !important;
 }
 
 .scientist-card .card-visual::after {
@@ -35,10 +41,24 @@
     z-index: 1;
 }
 
+body.theme-light .scientist-card .card-visual::after {
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 60%);
+}
+
+body.theme-light .scientist-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.07) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+body.theme-light .scientist-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(217, 119, 6, 0.25) !important;
+}
+
 .timeline-point:hover .timeline-dot {
     transform: scale(1.5);
-    background: #FDE047;
-    box-shadow: 0 0 20px #FDE047;
+    background: var(--accent-gold-border);
+    box-shadow: 0 0 20px var(--accent-gold-border);
 }
 
 @media (max-width: 768px) {
@@ -57,24 +77,37 @@
     font-family: 'Inter', sans-serif;
 }
 
+body.theme-light .scientist-details {
+    color: var(--text-primary);
+}
+
 .scientist-tagline {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #FDE047;
+    color: var(--accent-gold-text);
     margin-bottom: 1.5rem;
     letter-spacing: 0.02em;
     text-shadow: 0 0 20px rgba(253, 224, 71, 0.2);
 }
 
+body.theme-light .scientist-tagline {
+    text-shadow: none;
+}
+
 .scientist-quote {
-    border-left: 3px solid #FDE047;
+    border-left: 3px solid var(--accent-gold-border);
     padding: 1rem 1.5rem;
     margin: 2rem 0;
     font-style: italic;
     color: rgba(255, 255, 255, 0.85);
     font-size: 1.15rem;
-    background: linear-gradient(to right, rgba(253, 224, 71, 0.08), transparent);
+    background: linear-gradient(to right, var(--accent-gold-bg), transparent);
     border-radius: 0 12px 12px 0;
+}
+
+body.theme-light .scientist-quote {
+    color: var(--text-secondary);
+    background: linear-gradient(to right, var(--accent-gold-bg-strong), transparent);
 }
 
 .scientist-details h3 {
@@ -86,13 +119,17 @@
     letter-spacing: -0.01em;
 }
 
+body.theme-light .scientist-details h3 {
+    color: var(--text-primary);
+}
+
 .scientist-details p {
     margin-bottom: 1.2rem;
     opacity: 0.9;
 }
 
 .highlight-box {
-    background: rgba(253, 224, 71, 0.03);
+    background: var(--accent-gold-bg);
     border: 1px solid rgba(253, 224, 71, 0.15);
     padding: 1.5rem;
     border-radius: 16px;
@@ -100,8 +137,14 @@
     backdrop-filter: blur(10px);
 }
 
+body.theme-light .highlight-box {
+    background: #fffbeb;
+    border: 1px solid rgba(217, 119, 6, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
 .highlight-box strong {
-    color: #FDE047;
+    color: var(--accent-gold-text);
     display: block;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
@@ -126,12 +169,12 @@
     content: '→';
     position: absolute;
     left: 0;
-    color: #FDE047;
+    color: var(--accent-gold-text);
     font-weight: bold;
 }
 
 .scientist-details b {
-    color: #FDE047;
+    color: var(--accent-gold-text);
     font-weight: 600;
 }
 
@@ -157,6 +200,33 @@
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
     min-height: 3.5em !important;
+}
+
+body.theme-light .scientist-card .card-title {
+    color: #1d1d1f !important;
+}
+
+body.theme-light .scientist-card .card-desc {
+    color: #4e4e56 !important;
+}
+
+body.theme-light .sci-portrait-blur-bg {
+    filter: blur(20px) brightness(0.9) !important;
+    opacity: 0.5 !important;
+}
+
+body.theme-light .scientist-card .card-visual {
+    background: transparent !important;
+}
+
+body.theme-light .scientist-card .group-tag {
+    background: rgba(67, 97, 238, 0.1) !important;
+    border-color: rgba(67, 97, 238, 0.2) !important;
+    color: #4361ee !important;
+}
+
+body.theme-light .scientist-card .btn-text {
+    color: #4361ee !important;
 }
 
 @media (max-width: 768px) {

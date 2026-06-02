@@ -67,9 +67,9 @@
         let currentLevel = 1; // 0: Easy, 1: Medium, 2: Hard
         
         function getLevelConfig(level) {
-            if (level === 0) return { key: 'scientists.quiz.level.easy', fallback: 'Easy', color: '#4ADE80', rgb: '74,222,128', distractors: 1 };
-            if (level === 1) return { key: 'scientists.quiz.level.medium', fallback: 'Medium', color: '#FDE047', rgb: '253,224,71', distractors: 3 };
-            return { key: 'scientists.quiz.level.hard', fallback: 'Hard', color: '#F87171', rgb: '248,113,113', distractors: 3 };
+            if (level === 0) return { key: 'scientists.quiz.level.easy', fallback: 'Easy', color: 'var(--success)', bg: 'rgba(52, 199, 89, 0.12)', border: 'rgba(52, 199, 89, 0.3)', distractors: 1 };
+            if (level === 1) return { key: 'scientists.quiz.level.medium', fallback: 'Medium', color: 'var(--accent-gold-text)', bg: 'var(--accent-gold-bg-strong)', border: 'var(--accent-gold-border)', distractors: 3 };
+            return { key: 'scientists.quiz.level.hard', fallback: 'Hard', color: 'var(--accent-red)', bg: 'rgba(255, 59, 48, 0.12)', border: 'rgba(255, 59, 48, 0.3)', distractors: 3 };
         }
 
         function renderQuestion() {
@@ -100,7 +100,7 @@
             const questionText = t(currentScientist.descKey, currentScientist.description || 'Identify the scientist based on this description.');
             
             container.innerHTML = `
-                <div class="quiz-card fade-in" style="max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.03); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1);">
+                <div class="quiz-card fade-in" style="max-width: 800px; margin: 0 auto; background: var(--bg-secondary, rgba(255,255,255,0.03)); border-radius: 20px; padding: 2rem; border: 1px solid var(--border-default, rgba(255,255,255,0.1));">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                         <div class="quiz-progress" style="color: var(--text-secondary); font-weight: 600;">${progressText}</div>
                         <div class="difficulty-badge" style="
@@ -108,9 +108,9 @@
                             font-weight: 600; 
                             padding: 4px 12px; 
                             border-radius: 99px; 
-                            background: rgba(${levelConfig.rgb},0.2); 
+                            background: ${levelConfig.bg}; 
                             color: ${levelConfig.color};
-                            border: 1px solid rgba(${levelConfig.rgb},0.4);
+                            border: 1px solid ${levelConfig.border};
                             transition: all 0.3s ease;
                         ">
                             ${t(levelConfig.key, levelConfig.fallback)}
@@ -118,7 +118,7 @@
                     </div>
                     
                     <div class="quiz-question-container" style="margin-bottom: 2rem; text-align: center;">
-                        <h3 class="quiz-question-intro" style="font-size: 1.2rem; margin-bottom: 1rem; color: #fff;">${t('scientists.quiz.question_intro', 'Who is this scientist?')}</h3>
+                        <h3 class="quiz-question-intro" style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; opacity: 0.8;">${t('scientists.quiz.question_intro', 'Who is this scientist?')}</h3>
                         <p class="quiz-question-desc" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary);">${questionText}</p>
                     </div>
 
@@ -229,7 +229,7 @@
                                     <div class="recommendation-icon" style="
                                         width: 40px; height: 40px; border-radius: 50%;
                                         background: rgba(253,224,71,0.1); 
-                                        color: #FDE047;
+                                        color: var(--accent-gold-text);
                                         display: flex; align-items: center; justify-content: center; font-weight: bold;
                                     ">${t(sys.titleKey, sys.id).charAt(0)}</div>
                                     <div style="flex: 1; text-align: left;">
@@ -252,9 +252,9 @@
                 <div class="score-circle" style="
                     width: 140px; height: 140px; 
                     border-radius: 50%; 
-                    border: 4px solid #FDE047; 
+                    border: 4px solid var(--accent-gold-border); 
                     display: flex; align-items: center; justify-content: center; 
-                    font-size: 2.5rem; font-weight: bold; color: #FDE047;
+                    font-size: 2.5rem; font-weight: bold; color: var(--accent-gold-text);
                     margin: 2rem 0;
                     box-shadow: 0 0 30px rgba(253,224,71,0.2);
                 ">${percentage}%</div>
@@ -279,7 +279,7 @@
             });
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'translateY(-3px)';
-                card.style.borderColor = '#FDE047';
+                card.style.borderColor = 'var(--accent-gold-border)';
                 card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
             });
             card.addEventListener('mouseleave', () => {

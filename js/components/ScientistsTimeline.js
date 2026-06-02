@@ -95,7 +95,7 @@
             yearLabel.style.cssText = `
                 font-size: 0.75rem;
                 font-weight: 800;
-                color: #FDE047;
+                color: var(--accent-gold-text);
                 margin-bottom: 10px;
                 font-family: 'Space Grotesk', sans-serif;
                 letter-spacing: 0.05em;
@@ -108,7 +108,7 @@
                 width: 14px;
                 height: 14px;
                 border-radius: 50%;
-                background: #FDE047;
+                background: var(--accent-gold-border);
                 border: 3px solid var(--bg-primary);
                 box-shadow: 0 0 15px rgba(253, 224, 71, 0.4);
                 transition: all 0.3s ease;
@@ -135,7 +135,7 @@
             pointContainer.addEventListener('mouseenter', () => {
                 dot.style.transform = 'scale(1.4)';
                 dot.style.boxShadow = '0 0 25px rgba(253, 224, 71, 0.8)';
-                nameLabel.style.color = '#FDE047';
+                nameLabel.style.color = 'var(--accent-gold-text)';
             });
 
             pointContainer.addEventListener('mouseleave', () => {
@@ -229,7 +229,6 @@
                 ${sci.image ? `
                     <div class="sci-portrait-placeholder" style="
                         position:absolute;top:0;left:0;width:100%;height:100%;
-                        background:#060401;
                     "></div>
                     <img class="sci-portrait-blur-bg" src="${sci.image}"
                         style="position:absolute;top:-10%;left:-10%;width:120%;height:120%;
@@ -253,26 +252,26 @@
         `;
 
         card.innerHTML = `
-            <div class="card-visual" style="border-color:#FDE04740; overflow:hidden; position:relative; background: #060401;">
+            <div class="card-visual" style="border-color:var(--accent-gold-border); overflow:hidden; position:relative;">
                 ${portraitHtml}
                 <div class="group-tag" style="
                     position:absolute;top:10px;right:10px;z-index:3;
-                    background:rgba(253,224,71,0.12);border:1px solid rgba(253,224,71,0.28);
-                    color:#FDE047;font-size:0.65rem;font-weight:700;
+                    background:var(--accent-gold-bg-strong);border:1px solid var(--accent-gold-border);
+                    color:var(--accent-gold-text);font-size:0.65rem;font-weight:700;
                     padding:4px 10px;border-radius:999px;white-space:nowrap;
                     backdrop-filter:blur(8px);
                 ">${t('group.scientist', 'Учёные')}</div>
                 <div class="visual-placeholder" style="
-                    background:radial-gradient(circle at 50% 30%, rgba(253,224,71,0.06) 0%, transparent 70%);
+                    background:radial-gradient(circle at 50% 30%, var(--accent-gold-bg-strong) 0%, transparent 70%);
                     opacity:1; pointer-events:none; z-index:1;
                 "></div>
             </div>
             <div class="card-content" style="padding: 20px;">
-                <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 8px; color: #fff;">${t(sci.titleKey, sci.id)}</h3>
+                <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 8px;">${t(sci.titleKey, sci.id)}</h3>
                 <p class="card-desc" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; height: 3.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${t(sci.descKey, '')}</p>
             </div>
             <div class="card-actions" style="padding: 0 20px 20px;">
-                <button class="btn-text" style="color: #FDE047; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;">
+                <button class="btn-text" style="color: var(--accent-gold-text); font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;">
                     ${t('detail.explore', 'Explore')} 
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>

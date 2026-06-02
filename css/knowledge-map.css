@@ -78,6 +78,171 @@
     }
 }
 
+body.theme-light .connection-line {
+    stroke: rgba(0, 0, 0, 0.12);
+}
+
+/* ── Light Theme: Knowledge Map Surfaces ── */
+body.theme-light .map-canvas {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 16px 48px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .map-node {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .map-node:hover,
+body.theme-light .map-node.active {
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+body.theme-light .map-node.active .node-label {
+    color: var(--text-primary, #1a1a1f);
+}
+
+body.theme-light .map-side-panel {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 16px 48px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .panel-section {
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .recommendation-card {
+    background: rgba(0, 122, 255, 0.06);
+    border-color: rgba(0, 122, 255, 0.15);
+}
+
+body.theme-light .map-fallback-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+body.theme-light .mobile-map-panel-inner {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 16px 48px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .mobile-map-header {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .mobile-stat-card {
+    background: #f9f9fb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .mobile-stat-card:active {
+    background: #ecedf1;
+}
+
+body.theme-light .mobile-stat-lbl {
+    color: #8e8e96;
+}
+
+body.theme-light .mobile-perf-section {
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .mobile-perf-section h4 {
+    color: #8e8e96;
+}
+
+body.theme-light .mobile-system-btn {
+    background: #f9f9fb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    color: #1a1a1f;
+}
+
+body.theme-light .mobile-system-btn:hover,
+body.theme-light .mobile-system-btn:focus-visible {
+    background: #ecedf1;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.theme-light .mobile-sys-icon {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .mobile-sys-bar-track {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .mobile-sys-arrow {
+    color: rgba(0, 0, 0, 0.25);
+}
+
+body.theme-light .mobile-map-action-btn {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(67, 97, 238, 0.04));
+    border: 1px solid rgba(67, 97, 238, 0.2);
+    color: #4361ee;
+}
+
+body.theme-light .mobile-map-back-btn {
+    background: #f9f9fb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    color: #8e8e96;
+}
+
+/* Overall Progress Panel — Light Theme */
+body.theme-light .overall-panel-header {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .ring-bg {
+    stroke: rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .overall-stat-card {
+    background: #f9f9fb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .overall-stat-card:hover {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .overall-stat-label {
+    color: #8e8e96;
+}
+
+body.theme-light .overall-breakdown-section {
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .overall-breakdown-section h4 {
+    color: #8e8e96;
+}
+
+body.theme-light .breakdown-bar-track {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .overall-action-btn {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(67, 97, 238, 0.04));
+    border: 1px solid rgba(67, 97, 238, 0.2);
+    color: #4361ee;
+}
+
+body.theme-light .overall-action-btn:hover {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.16), rgba(67, 97, 238, 0.08));
+    border-color: rgba(67, 97, 238, 0.3);
+    box-shadow: 0 4px 16px rgba(67, 97, 238, 0.12);
+}
+
 /* Map Nodes */
 .map-node {
     position: absolute;
